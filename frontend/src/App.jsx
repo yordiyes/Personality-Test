@@ -1,172 +1,208 @@
 import React, { useState } from "react";
+import "./App.css";
 
 const questions = [
-  { id: 1, left: "makes lists", right: "relies on memory" },
-  { id: 2, left: "sceptical", right: "wants to believe" },
-  { id: 3, left: "bored by time alone", right: "needs time alone" },
+  {
+    id: 1,
+    trait: "E",
+    text: "I help other shoppers who are at a store and appear to be lost.",
+  },
+  {
+    id: 2,
+    trait: "I",
+    text: "I obsessively recall recent/past encounters in my head.",
+  },
+  {
+    id: 3,
+    trait: "J",
+    text: "I constantly overextend myself (make projects way bigger than needed).",
+  },
   {
     id: 4,
-    left: "accepts things as they are",
-    right: "unsatisfied with the way things are",
+    trait: "F",
+    text: "I have extreme fear of failing or looking bad in front of everyone.",
   },
-  { id: 5, left: "keeps a clean room", right: "just puts stuff where ever" },
+  {
+    id: 5,
+    trait: "I",
+    text: "I ignore calls and messages, unless it's someone I really want to talk to.",
+  },
   {
     id: 6,
-    left: 'thinks "robotic" is an insult',
-    right: "strives to have a mechanical mind",
+    trait: "P",
+    text: "I spend more time on learning about new things than focusing on the things that need to be done.",
   },
-  { id: 7, left: "energetic", right: "mellow" },
+  {
+    id: 7,
+    trait: "S",
+    text: "I think physical appearance counts as or reflects/correlates to personality.",
+  },
   {
     id: 8,
-    left: "prefer to take multiple choice test",
-    right: "prefer essay answers",
+    trait: "E",
+    text: "I appear confident before presentations and tests.",
   },
-  { id: 9, left: "chaotic", right: "organized" },
-  { id: 10, left: "easily hurt", right: "thick-skinned" },
-  { id: 11, left: "works best in groups", right: "works best alone" },
-  { id: 12, left: "focused on the present", right: "focused on the future" },
-  { id: 13, left: "plans far ahead", right: "plans at the last minute" },
-  { id: 14, left: "wants people's respect", right: "wants their love" },
+  {
+    id: 9,
+    trait: "N",
+    text: "I often come up with new ideas to make society better.",
+  },
+  {
+    id: 10,
+    trait: "T",
+    text: "I will admit to being wrong in order to learn the truth.",
+  },
+  { id: 11, trait: "S", text: "I tend to trip over things often." },
+  {
+    id: 12,
+    trait: "J",
+    text: "I carry additional workload on team projects to achieve better results.",
+  },
+  {
+    id: 13,
+    trait: "I",
+    text: "I have a small number of lifelong friends, instead of a large group of people to hang out with.",
+  },
+  {
+    id: 14,
+    trait: "P",
+    text: "I am forgetful when it comes to personal history.",
+  },
   {
     id: 15,
-    left: "gets worn out by parties",
-    right: "gets fired up by parties",
+    trait: "F",
+    text: "I refuse to do a job unless it is authentic and aligns with my purpose.",
   },
-  { id: 16, left: "fits in", right: "stands out" },
-  { id: 17, left: "keeps options open", right: "commits" },
+  {
+    id: 16,
+    trait: "T",
+    text: "I do things usually attributed to men like fixing things and snowmobiling.",
+  },
+  {
+    id: 17,
+    trait: "N",
+    text: "I recognize the interconnectedness of various subjects.",
+  },
   {
     id: 18,
-    left: "wants to be good at fixing things",
-    right: "wants to be good at fixing people",
+    trait: "P",
+    text: "I'll take a different path home today because I went the other way last time.",
   },
-  { id: 19, left: "talks more", right: "listens more" },
+  {
+    id: 19,
+    trait: "S",
+    text: "I talk to trees, and feel that I can sense nature.",
+  },
   {
     id: 20,
-    left: "when describing an event, will tell people what happened",
-    right: "when describing an event, will tell people what it meant",
+    trait: "P",
+    text: "I'm often unaware of the physical environment.",
   },
-  { id: 21, left: "gets work done right away", right: "procrastinates" },
-  { id: 22, left: "follows the heart", right: "follows the head" },
-  { id: 23, left: "stays at home", right: "goes out on the town" },
-  { id: 24, left: "wants the big picture", right: "wants the details" },
-  { id: 25, left: "improvises", right: "prepares" },
+  {
+    id: 21,
+    trait: "E",
+    text: "When playing video games, I care more about socializing than achievements.",
+  },
+  {
+    id: 22,
+    trait: "I",
+    text: "I dress in very unorthodox/unfashionable outfits because they reflect my personality.",
+  },
+  {
+    id: 23,
+    trait: "P",
+    text: "I suffer from extreme Fear of Missing Out (FOMO).",
+  },
+  { id: 24, trait: "J", text: "I study how to hold on to my money." },
+  {
+    id: 25,
+    trait: "I",
+    text: "I get to know people through text or social media rather than in person.",
+  },
   {
     id: 26,
-    left: "bases morality on justice",
-    right: "bases morality on compassion",
+    trait: "T",
+    text: "I get very frustrated when others insist wrong facts are right.",
   },
+  { id: 27, trait: "S", text: "I frequently check burners/locks." },
   {
-    id: 27,
-    left: "finds it difficult to yell very loudly",
-    right: "yelling to others when they are far away comes naturally",
-  },
-  { id: 28, left: "theoretical", right: "empirical" },
-  { id: 29, left: "works hard", right: "plays hard" },
-  { id: 30, left: "uncomfortable with emotions", right: "values emotions" },
-  {
-    id: 31,
-    left: "likes to perform in front of other people",
-    right: "avoids public speaking",
-  },
-  {
-    id: 32,
-    left: 'likes to know "who?", "what?", "when?"',
-    right: 'likes to know "why?"',
+    id: 28,
+    trait: "F",
+    text: "I hate watching people feel embarrassed / get rejected.",
   },
 ];
 
-function App() {
-  const [answers, setAnswers] = useState({});
+const App = () => {
+  const [responses, setResponses] = useState(
+    questions.reduce((acc, q) => ({ ...acc, [q.id]: 0 }), {})
+  );
   const [result, setResult] = useState(null);
 
-  const handleChange = (questionId, value) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: parseInt(value) }));
+  const handleResponseChange = (questionId, value) => {
+    setResponses((prev) => ({ ...prev, [questionId]: parseInt(value) }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (Object.keys(answers).length !== questions.length) {
-      alert("Please answer all questions.");
-      return;
-    }
-
+  const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/score", {
+      const response = await fetch("http://localhost:5000/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ responses: Object.values(responses) }),
       });
-      if (!response.ok) {
-        throw new Error("Failed to fetch results");
-      }
-      const data = await response.json();
-      setResult(data);
-    } catch (err) {
-      console.error(err);
-      alert("Error submitting your answers.");
+
+      const resultData = await response.json();
+      setResult(resultData);
+    } catch (error) {
+      console.error("Error submitting responses:", error);
     }
   };
 
   return (
-    <div className="app-container">
-      <h1>Open Extended Jungian Type Scales 1.2</h1>
-      <p>
-        This is an interactive version of the OEJTS – an open source alternative
-        to the Myers-Briggs Type Indicator. Please answer the following 32
-        questions by selecting a score from 1 (left statement) to 5 (right
-        statement).
-      </p>
-      <form onSubmit={handleSubmit}>
-        {questions.map((q) => (
-          <div className="question" key={q.id}>
-            <h3>Question {q.id}</h3>
-            <p>
-              <em>{q.left}</em> <strong>vs.</strong> <em>{q.right}</em>
-            </p>
-            <div className="options">
-              {[1, 2, 3, 4, 5].map((num) => (
-                <label key={num}>
+    <div className="container">
+      <h1>Personality Test</h1>
+      <table className="question-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Strongly Disagree</th>
+            <th>Disagree</th>
+            <th>Neutral</th>
+            <th>Agree</th>
+            <th>Strongly Agree</th>
+          </tr>
+        </thead>
+        <tbody>
+          {questions.map((q) => (
+            <tr key={q.id}>
+              <td className="bold">{q.text}</td>
+              {[-2, -1, 0, 1, 2].map((val) => (
+                <td key={val}>
                   <input
                     type="radio"
                     name={`question-${q.id}`}
-                    value={num}
-                    onChange={(e) => handleChange(q.id, e.target.value)}
+                    value={val}
+                    onChange={() => handleResponseChange(q.id, val)}
                   />
-                  {num}
-                </label>
+                </td>
               ))}
-            </div>
-          </div>
-        ))}
-        <button type="submit">Submit Answers</button>
-      </form>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button onClick={handleSubmit} className="submit-button">
+        Submit
+      </button>
+
       {result && (
-        <div className="results">
-          <h2>Your Results</h2>
-          <p>
-            <strong>IE Score:</strong> {result.IE}
-          </p>
-          <p>
-            <strong>SN Score:</strong> {result.SN}
-          </p>
-          <p>
-            <strong>FT Score:</strong> {result.FT}
-          </p>
-          <p>
-            <strong>JP Score:</strong> {result.JP}
-          </p>
-          <h3>Your Personality Type: {result.personality}</h3>
-          <p>
-            Interpretation:{" "}
-            {result.personality[0] === "E" ? "Extroverted" : "Introverted"},{" "}
-            {result.personality[1] === "N" ? "Intuitive" : "Sensing"},{" "}
-            {result.personality[2] === "T" ? "Thinking" : "Feeling"},{" "}
-            {result.personality[3] === "P" ? "Perceiving" : "Judging"}.
-          </p>
+        <div className="result">
+          <h2>Your MBTI Type: {result.type}</h2>
+          <p>{result.description}</p>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default App;
