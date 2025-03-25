@@ -7,7 +7,7 @@ const Result = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch(`{${URL}/result`, {
+        const response = await fetch(`${URL}/result`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
