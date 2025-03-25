@@ -29,20 +29,25 @@ const mbtiDescriptions = {
 function calculateScores(answers) {
   const Q = answers; // Array of answers
 
-  // Calculate scores based on the adjusted question assignments
-  const IE = 21 + Q[0] - Q[1] + Q[2] - Q[3] + Q[4] - Q[5] - Q[6];
+  // Calculate raw scores based on question assignments
+  const IE_raw = 21 + Q[0] - Q[1] + Q[2] - Q[3] + Q[4] - Q[5] - Q[6];
+  const SN_raw = 21 + Q[7] - Q[8] + Q[9] - Q[10] + Q[11] - Q[12] - Q[13];
+  const FT_raw = 21 - Q[14] + Q[15] - Q[16] + Q[17] - Q[18] + Q[19] + Q[20];
+  const JP_raw = 21 + Q[21] - Q[22] + Q[23] - Q[24] + Q[25] - Q[26] - Q[27];
 
-  const SN = 21 + Q[7] - Q[8] + Q[9] - Q[10] + Q[11] - Q[12] - Q[13];
+  // Normalize scores to range [-2, 2]
+  const normalize = (score) => (score - 21) / 10.5;
 
-  const FT = 21 - Q[14] + Q[15] - Q[16] + Q[17] - Q[18] + Q[19] + Q[20];
-
-  const JP = 21 + Q[21] - Q[22] + Q[23] - Q[24] + Q[25] - Q[26] - Q[27];
+  const IE = normalize(IE_raw);
+  const SN = normalize(SN_raw);
+  const FT = normalize(FT_raw);
+  const JP = normalize(JP_raw);
 
   // Determine personality type
-  const IEType = IE > 21 ? "E" : "I";
-  const SNType = SN > 21 ? "N" : "S";
-  const FTType = FT > 21 ? "T" : "F";
-  const JPType = JP > 21 ? "P" : "J";
+  const IEType = IE > 0 ? "E" : "I";
+  const SNType = SN > 0 ? "N" : "S";
+  const FTType = FT > 0 ? "T" : "F";
+  const JPType = JP > 0 ? "P" : "J";
 
   console.log(IE, SN, FT, JP); // Debugging output
 
@@ -54,6 +59,7 @@ function calculateScores(answers) {
     personality: IEType + SNType + FTType + JPType,
   };
 }
+
 
 
 // POST endpoint to submit answers and calculate the MBTI type
