@@ -55,7 +55,6 @@ function calculateScores2(answers) {
   const FT_raw = 21 - Q[15] + Q[16] - Q[17] + Q[18] - Q[19] + Q[20] + Q[21];
   const JP_raw = 21 + Q[22] - Q[23] + Q[24] - Q[25] + Q[26] - Q[27] - Q[28];
 
-
   // Normalize scores to range [-2, 2]
   const normalize = (score) => (score - 21) / 10.5;
 
@@ -105,7 +104,6 @@ function calculateAverage() {
   };
 }
 
-
 // POST endpoint to receive answers and return the calculated scores and personality type.
 app.post("/api/score", (req, res) => {
   const answers = req.body.answers;
@@ -124,7 +122,6 @@ app.post("/api/score2", (req, res) => {
   result2 = calculateScores2(answers);
   res.json({ message: "Score 2 calculated", result: result2 });
 });
-
 
 app.get("/api/result", (req, res) => {
   const results = calculateAverage();
