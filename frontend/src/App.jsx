@@ -291,6 +291,7 @@ function App() {
                 questions={questions2}
                 onSubmitted={handleSubmit2}
                 onChanged={handleChange}
+                answers={answers}
               />
             }
           />

@@ -1,14 +1,17 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const Oejts2 = ({ questions, onSubmitted, onChanged }) => {
+const Oejts2 = ({ questions, onSubmitted, onChanged, answers }) => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     onSubmitted(e);
-    navigate("/results");
+    if (Object.keys(answers).length === questions.length) {
+      navigate("/results");
+    }
+    
   };
   return (
     <div className="">
