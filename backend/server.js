@@ -32,18 +32,12 @@ function calculateScores(answers) {
   const FT_norm = normalize(FT);
   const JP_norm = normalize(JP);
 
-  // Determine personality type based on normalized score (0 threshold)
-  const IEType = IE_norm > 0 ? "E" : "I";
-  const SNType = SN_norm > 0 ? "N" : "S";
-  const FTType = FT_norm > 0 ? "T" : "F";
-  const JPType = JP_norm > 0 ? "P" : "J";
   console.log(IE_norm, SN_norm, FT_norm, JP_norm); // Debugging output
   return {
     IE: IE_norm,
     SN: SN_norm,
     FT: FT_norm,
     JP: JP_norm,
-    personality: IEType + SNType + FTType + JPType,
   };
 }
 
@@ -65,20 +59,13 @@ function calculateScores2(answers) {
   const FT = normalize(FT_raw);
   const JP = normalize(JP_raw);
 
-  // Determine personality type
-  const IEType = IE > 0 ? "E" : "I";
-  const SNType = SN > 0 ? "N" : "S";
-  const FTType = FT > 0 ? "T" : "F";
-  const JPType = JP > 0 ? "P" : "J";
 
   console.log(IE, SN, FT, JP); // Debugging output
-  console.log(IEType, SNType, FTType, JPType); // Debugging output
   return {
     IE,
     SN,
     FT,
     JP,
-    personality: IEType + SNType + FTType + JPType,
   };
 }
 
@@ -87,10 +74,10 @@ function calculateAverage() {
     return { error: "Scores not available. Please submit both tests first." };
   }
 
-  const IE = (result1.IE + result2.IE) / 2;
-  const SN = (result1.SN + result2.SN) / 2;
-  const FT = (result1.FT + result2.FT) / 2;
-  const JP = (result1.JP + result2.JP) / 2;
+  const IE = ((result1.IE + result2.IE) / 2).toFixed(2);
+  const SN = ((result1.SN + result2.SN) / 2).toFixed(2);
+  const FT = ((result1.FT + result2.FT) / 2).toFixed(2);
+  const JP = ((result1.JP + result2.JP) / 2).toFixed(2);
 
   console.log(IE, SN, FT, JP); // Debugging output
   return {
