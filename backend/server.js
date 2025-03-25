@@ -27,22 +27,34 @@ const mbtiDescriptions = {
 
 // Updated calculation function for 28 questions
 function calculateScores(answers) {
-  const Q = answers;
+  const Q = answers; // Array of answers
 
-  // Adjusted formula for 28 questions
-  const IE = 12 - Q[0] - Q[4] + Q[8] + Q[12] - Q[16] + Q[20] - Q[24];
-  const SN = 10 + Q[1] + Q[5] - Q[9] - Q[13] + Q[17] - Q[21] + Q[25];
-  const FT = 12 - Q[2] + Q[6] + Q[10] - Q[14] + Q[18] - Q[22] + Q[26];
-  const JP = 8 + Q[3] + Q[7] - Q[11] + Q[15] - Q[19] + Q[23] - Q[27];
+  // Calculate scores based on the adjusted question assignments
+  const IE = 21 + Q[0] - Q[1] + Q[2] - Q[3] + Q[4] - Q[5] - Q[6];
 
-  // Calculate personality type based on scores
-  const IEType = IE > 5 ? "E" : "I";
-  const SNType = SN > 4 ? "N" : "S";
-  const FTType = FT > 5 ? "T" : "F";
-  const JPType = JP > 4 ? "P" : "J";
+  const SN = 21 + Q[7] - Q[8] + Q[9] - Q[10] + Q[11] - Q[12] - Q[13];
 
-  return { IE, SN, FT, JP, personality: IEType + SNType + FTType + JPType };
+  const FT = 21 - Q[14] + Q[15] - Q[16] + Q[17] - Q[18] + Q[19] + Q[20];
+
+  const JP = 21 + Q[21] - Q[22] + Q[23] - Q[24] + Q[25] - Q[26] - Q[27];
+
+  // Determine personality type
+  const IEType = IE > 21 ? "E" : "I";
+  const SNType = SN > 21 ? "N" : "S";
+  const FTType = FT > 21 ? "T" : "F";
+  const JPType = JP > 21 ? "P" : "J";
+
+  console.log(IE, SN, FT, JP); // Debugging output
+
+  return {
+    IE,
+    SN,
+    FT,
+    JP,
+    personality: IEType + SNType + FTType + JPType,
+  };
 }
+
 
 // POST endpoint to submit answers and calculate the MBTI type
 app.post("/submit", (req, res) => {
