@@ -36,7 +36,7 @@ function calculateScores(answers) {
   const SNType = SN_norm > 0 ? "N" : "S";
   const FTType = FT_norm > 0 ? "T" : "F";
   const JPType = JP_norm > 0 ? "P" : "J";
-
+  console.log(IE_norm, SN_norm, FT_norm, JP_norm); // Debugging output
   return {
     IE: IE_norm,
     SN: SN_norm,
@@ -50,10 +50,11 @@ function calculateScores2(answers) {
   const Q = answers; // Array of answers
 
   // Calculate raw scores based on question assignments
-  const IE_raw = 21 + Q[0] - Q[1] + Q[2] - Q[3] + Q[4] - Q[5] - Q[6];
-  const SN_raw = 21 + Q[7] - Q[8] + Q[9] - Q[10] + Q[11] - Q[12] - Q[13];
-  const FT_raw = 21 - Q[14] + Q[15] - Q[16] + Q[17] - Q[18] + Q[19] + Q[20];
-  const JP_raw = 21 + Q[21] - Q[22] + Q[23] - Q[24] + Q[25] - Q[26] - Q[27];
+  const IE_raw = 21 + Q[1] - Q[2] + Q[3] - Q[4] + Q[5] - Q[6] - Q[7];
+  const SN_raw = 21 + Q[8] - Q[9] + Q[10] - Q[11] + Q[12] - Q[13] - Q[14];
+  const FT_raw = 21 - Q[15] + Q[16] - Q[17] + Q[18] - Q[19] + Q[20] + Q[21];
+  const JP_raw = 21 + Q[22] - Q[23] + Q[24] - Q[25] + Q[26] - Q[27] - Q[28];
+
 
   // Normalize scores to range [-2, 2]
   const normalize = (score) => (score - 21) / 10.5;
@@ -70,7 +71,7 @@ function calculateScores2(answers) {
   const JPType = JP > 0 ? "P" : "J";
 
   console.log(IE, SN, FT, JP); // Debugging output
-
+  console.log(IEType, SNType, FTType, JPType); // Debugging output
   return {
     IE,
     SN,
@@ -81,51 +82,49 @@ function calculateScores2(answers) {
 }
 
 function calculateAverage() {
-  const score = calculateScores();
-  const score2 = calculateScores2();
-  const IE = (score.IE + score2.IE) / 2;
-  const SN = (score.SN + score2.SN) / 2;
-  const FT = (score.FT + score2.FT) / 2;
-  const JP = (score.JP + score2.JP) / 2;
-  // Determine personality type
-  const IEType = IE > 0 ? "E" : "I";
-  const SNType = SN > 0 ? "N" : "S";
-  const FTType = FT > 0 ? "T" : "F";
-  const JPType = JP > 0 ? "P" : "J";
+  if (!result1 || !result2) {
+    return { error: "Scores not available. Please submit both tests first." };
+  }
+
+  const IE = (result1.IE + result2.IE) / 2;
+  const SN = (result1.SN + result2.SN) / 2;
+  const FT = (result1.FT + result2.FT) / 2;
+  const JP = (result1.JP + result2.JP) / 2;
 
   console.log(IE, SN, FT, JP); // Debugging output
-
   return {
     IE,
     SN,
     FT,
     JP,
-    personality: IEType + SNType + FTType + JPType,
+    personality:
+      (IE > 0 ? "E" : "I") +
+      (SN > 0 ? "N" : "S") +
+      (FT > 0 ? "T" : "F") +
+      (JP > 0 ? "P" : "J"),
   };
 }
+
 
 // POST endpoint to receive answers and return the calculated scores and personality type.
 app.post("/api/score", (req, res) => {
   const answers = req.body.answers;
-  // Verify that all 32 answers are provided.
   if (!answers || Object.keys(answers).length !== 32) {
-    return res
-      .status(400)
-      .json({ error: "Please provide answers for all 32 questions." });
+    return res.status(400).json({ error: "Please provide all 32 answers." });
   }
   result1 = calculateScores(answers);
+  res.json({ message: "Score 1 calculated", result: result1 });
 });
 
 app.post("/api/score2", (req, res) => {
   const answers = req.body.answers;
-  // Verify that all 28 answers are provided.
   if (!answers || Object.keys(answers).length !== 28) {
-    return res
-      .status(400)
-      .json({ error: "Please provide answers for all 28 questions." });
+    return res.status(400).json({ error: "Please provide all 28 answers." });
   }
   result2 = calculateScores2(answers);
+  res.json({ message: "Score 2 calculated", result: result2 });
 });
+
 
 app.get("/api/result", (req, res) => {
   const results = calculateAverage();
