@@ -8,9 +8,7 @@ const Oejts2 = ({ questions, onSubmitted, onChanged, answers }) => {
     e.preventDefault();
 
     onSubmitted(e);
-    if (Object.keys(answers).length === questions.length) {
-      navigate("/results");
-    }
+    navigate("/results");
   };
   return (
     <div className="m-4 sm:mb-0 pb-10 font-serif md:w-[60%] md:mx-auto sm:px-5 sm:m-8 sm:shadow-2xl md:px-10 lg:px-20">

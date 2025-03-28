@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+const URL = import.meta.env.VITE_API_URL;
 
 const Result = () => {
   const [result, setResult] = useState(null);
@@ -6,7 +7,7 @@ const Result = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/result", {
+        const response = await fetch(`${URL}/result`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

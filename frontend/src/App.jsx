@@ -8,6 +8,8 @@ import OejtsPage from "./pages/OejtsPage";
 import Result from "./pages/Result";
 import EnneagramPage from "./pages/EnneagramPage";
 
+const URL = import.meta.env.VITE_API_URL;
+console.log(URL)
 const questions = [
   { id: 1, left: "makes lists", right: "relies on memory" },
   { id: 2, left: "sceptical", right: "wants to believe" },
@@ -231,7 +233,7 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/score2", {
+      const response = await fetch(`${URL}/score2`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),
@@ -253,7 +255,7 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/score", {
+      const response = await fetch(`${URL}/score`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),
