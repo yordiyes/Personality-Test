@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const OejtsPage = () => {
   return (
-    <div className="w-[60%] mx-auto m-8">
+    <div className="md:w-[60%] md:mx-auto sm:m-8 m-5 font-serif ">
       <p>
         This is an interactive version of the
         <span className=" font-bold ml-1">
@@ -31,16 +31,11 @@ const OejtsPage = () => {
 
       <NavLink
         to="/OEJTSTest/oepage1"
-        className="px-5 py-2 bg-blue-500 text-white rounded-md"
+        className="px-5 py-2 bg-neutral-300 p-2 border-[1px]"
       >
-        Start
+        Start Test &gt;&gt;
       </NavLink>
 
-      <p className="my-4">
-        <span className="font-bold">Instructions: </span>
-        Please answer the following 32 questions by selecting a score from 1
-        (left statement) to 5 (right statement).
-      </p>
       <Outlet />
     </div>
   );

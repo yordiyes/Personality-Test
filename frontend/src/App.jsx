@@ -6,6 +6,7 @@ import Enneagram from "./pages/tests/Enneagram";
 import Home from "./pages/Home";
 import OejtsPage from "./pages/OejtsPage";
 import Result from "./pages/Result";
+import EnneagramPage from "./pages/EnneagramPage";
 
 const questions = [
   { id: 1, left: "makes lists", right: "relies on memory" },
@@ -291,12 +292,14 @@ function App() {
                 questions={questions2}
                 onSubmitted={handleSubmit2}
                 onChanged={handleChange}
+                answers={answers}
               />
             }
           />
 
-          <Route path="/Enneagram" element={<Enneagram />} />
+          <Route path="/E-test" element={<Enneagram />} />
           <Route path="/results" element={<Result />} />
+          <Route path="/Enneagram" element={<EnneagramPage />} />
         </Routes>
       </BrowserRouter>
     </div>
