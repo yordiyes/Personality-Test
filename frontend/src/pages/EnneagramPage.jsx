@@ -9,8 +9,8 @@ const EnneagramPage = () => {
           Eclectic Energies Enneagram Tests
         </h1>
         <p className=" font-bold font-sans">
-          These two Enneagram tests help you determine which personality type
-          you are. Your wing will also be indicated.
+          This Enneagram test help you determine which personality type you are.
+          Your wing will also be indicated.
         </p>
       </div>
 
@@ -21,27 +21,12 @@ const EnneagramPage = () => {
           type). You'll get less questions per page after having answered enough
           questions to establish which types you are not.
         </p>
-        <div className="my-5">
+        <div className="my-5 border-b-2 pb-13 border-gray-400">
           <NavLink
             to="/E-test"
             className="ml-[20%] bg-neutral-300 p-2 border-[1px] mt-3"
           >
             Enneagram test &gt;&gt;
-          </NavLink>
-        </div>
-      </div>
-      <div className="mt-12">
-        <h2 className="font-semibold pb-3">
-          Enneagram test with instinctual variant
-        </h2>
-        <p>
-          With this test you get pairs of character traits to rate. It is
-          quicker than the other test, and indicates your instinctual subtype as
-          well.
-        </p>
-        <div className="my-5 border-b-2 pb-13 border-gray-400">
-          <NavLink className="ml-[20%] bg-neutral-300 p-2 border-[1px] mt-3">
-            Enneagram test 2 &gt;&gt;
           </NavLink>
         </div>
       </div>
