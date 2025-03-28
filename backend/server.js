@@ -235,5 +235,71 @@ app.get("/api/result", (req, res) => {
   const results = calculateAverage();
   res.json(results);
 });
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+
+///
+app.get("/api/result", (req, res) => {
+  const results = calculateAverage();
+  res.json(results);
+});
+
+const enneagramTypes = {
+  A: "The Romantic Individualist",
+  B: "The Loyal Guardian",
+  C: "The Peaceful Mediator",
+  D: "The Supportive Advisor",
+  E: "The Successful Achiever",
+  F: "The Intellectual Thinker",
+  G: "The Entertaining Optimist",
+  H: "The Protective Challenger",
+  I: "The Moral Perfectionist",
+};
+
+// POST route to calculate the result based on answers
+let sortedScores = [];
+
+app.post("/api/submit", (req, res) => {
+  const answers = req.body.answers; // Answers from the frontend (array of objects)
+
+  // Initialize scores for each Enneagram type
+  const scores = Object.keys(enneagramTypes).reduce((acc, type) => {
+    acc[type] = 0; // Start all types with a score of 0
+    return acc;
+  }, {});
+
+  // Calculate the score for each Enneagram type
+  answers.forEach((answer) => {
+    const { type, answer: score } = answer; // Destructure answer object
+    if (enneagramTypes[type]) {
+      scores[type] += score; // Add the answer score to the corresponding type's score
+    }
+  });
+
+  // Sort the scores from highest to lowest and include the type name
+  sortedScores = Object.keys(scores)
+    .map((type) => ({
+      typeName: enneagramTypes[type], // Add the type name
+      type: type, // The type code (e.g., "A")
+      score: scores[type], // The score for the type
+    }))
+    .sort((a, b) => b.score - a.score); // Sort in descending order of score
+
+  // Send a confirmation response
+  res.status(200).json({ message: "Result calculated successfully" });
+});
+
+// GET route to fetch sorted scores
+app.get("/api/scores", (req, res) => {
+  if (sortedScores.length > 0) {
+    res.json(sortedScores); // Send the sorted scores if available
+  } else {
+    res
+      .status(404)
+      .json({ message: "Scores not found. Please submit the answers first." });
+  }
+});
+
+// Start the server
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

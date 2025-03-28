@@ -362,12 +362,12 @@ export default function Enneagram() {
             {currentPage < totalPages - 1 ? (
               <button
                 onClick={goToNextPage}
-                // disabled={!isCurrentPageComplete()}
-                // className={`px-4 py-2 rounded ml-auto ${
-                //   !isCurrentPageComplete()
-                //     ? "bg-gray-300 cursor-not-allowed"
-                //     : "bg-blue-500 hover:bg-blue-600 text-white"
-                // }`}
+                disabled={!isCurrentPageComplete()}
+                className={`px-4 py-2 rounded ml-auto ${
+                  !isCurrentPageComplete()
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-blue-500 hover:bg-blue-600 text-white"
+                }`}
               >
                 Next
               </button>
