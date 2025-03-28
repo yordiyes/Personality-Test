@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 const URL = import.meta.env.VITE_API_URL;
 
 const Result = () => {
@@ -135,6 +136,11 @@ const Result = () => {
                 <p>No detailed description available.</p>
               )}
             </div>
+          </div>
+          <div className="my-5">
+            <NavLink to="/" className="bg-neutral-300 p-2 border-[1px] mt-3">
+              Home Page
+            </NavLink>
           </div>
         </div>
       </div>

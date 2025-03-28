@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 const URL = import.meta.env.VITE_API_URL;
 
 const enneagramTypes = {
@@ -44,9 +45,26 @@ const EnneagramResult = () => {
       <p className="text-center mt-10 text-gray-600">Loading results...</p>
     );
   }
+  const getWingType = (mainType, result) => {
+    const adjacentTypes = [mainType - 1, mainType + 1];
+
+    // Find the highest scoring adjacent type
+    let wingType = null;
+    for (let i = 1; i < result.length; i++) {
+      if (adjacentTypes.includes(enneagramTypes[result[i].type])) {
+        wingType = enneagramTypes[result[i].type];
+        break; // Stop at the first highest adjacent type
+      }
+    }
+
+    return wingType ? `${mainType}w${wingType}` : `${mainType}`;
+  };
+  const mainType = enneagramTypes[result[0].type];
+  const wing = getWingType(mainType, result);
+
   return (
     <div className="min-h-screen w-full font-serif p-4">
-      <div className="sm:mb-0 pb-10  md:w-[60%] md:mx-auto sm:px-5 sm:m-8 sm:shadow-2xl md:px-10 lg:px-20">
+      <div className="sm:mb-0 pb-10  md:w-[80%] lg:w-[60%] md:mx-auto sm:px-5 sm:m-8 sm:shadow-2xl md:px-10 lg:px-20">
         <h2 className="text-2xl font-bold text-gray-800">
           Enneagram Test Results
         </h2>
@@ -59,14 +77,14 @@ const EnneagramResult = () => {
         <h3 className="font-semibold text-lg mt-7">
           Your Type: <em>{result[0].typeName}</em>
         </h3>
-        <div className=" border-[1px]  p-6 mb-10 mt-4 mx-10 bg-gray-100">
+        <div className=" border-[1px] sm:mx-10 p-6 mb-10 mt-4 bg-gray-100">
           <p className="text-gray-700 text-[15px]">
             You are most likely a{" "}
             <strong>type {enneagramTypes[result[0].type]}</strong>.{" "}
             <em>( {result[0].typeName} )</em>.
           </p>
           <p className="text-[15px] mt-2">
-            Taking wings into account, you seem to be a <strong>3w4</strong>
+            Taking wings into account, you seem to be a <strong>{wing}</strong>
           </p>
           <div className="p-4 py-10 sm:px-8 md:px-20">
             {result.map(({ type, score }, index) => {
@@ -93,6 +111,11 @@ const EnneagramResult = () => {
           deciding which Enneagram type and wing you are, you might also want to
           consider the types with the highest test scores on the lists below.
         </p>
+        <div className="my-5">
+          <NavLink to="/" className="bg-neutral-300 p-2 border-[1px] mt-3">
+            Home Page
+          </NavLink>
+        </div>
       </div>
     </div>
   );
