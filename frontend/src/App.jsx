@@ -234,7 +234,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(`${URL}/score2`, {
+      const response = await fetch(`${URL}/api/score2`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),
@@ -256,7 +256,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(`${URL}/score`, {
+      const response = await fetch(`${URL}/api/score`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),

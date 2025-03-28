@@ -151,7 +151,7 @@ function calculateScores(answers) {
   const FT_norm = normalize(FT);
   const JP_norm = normalize(JP);
 
-  console.log(IE_norm, SN_norm, FT_norm, JP_norm); // Debugging output
+  // console.log(IE_norm, SN_norm, FT_norm, JP_norm); // Debugging output
   return {
     IE: IE_norm,
     SN: SN_norm,
@@ -177,7 +177,7 @@ function calculateScores2(answers) {
   const FT = normalize(FT_raw);
   const JP = normalize(JP_raw);
 
-  console.log(IE, SN, FT, JP); // Debugging output
+  // console.log(IE, SN, FT, JP); // Debugging output
   return {
     IE,
     SN,
