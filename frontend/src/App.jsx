@@ -242,6 +242,7 @@ function App() {
       if (!response.ok) {
         throw new Error("Failed to fetch results");
       }
+      setAnswers({});
     } catch (err) {
       console.error(err);
       alert("Error submitting your answers.");
