@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const URL = import.meta.env.VITE_API_URL;
 const enneagramTypes = {
   A: "The Moral Perfectionist",
   B: "The Supportive Advisor",
@@ -10,7 +11,7 @@ const enneagramTypes = {
   F: "The Loyal Guardian",
   G: "The Entertaining Optimist",
   H: "The Protective Challenger",
-  IDBFactory: "The Peaceful Mediator",
+  I: "The Peaceful Mediator",
 };
 
 const questions = {
@@ -252,7 +253,7 @@ export default function Enneagram() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/submit", {
+      const response = await fetch(`${URL}/api/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -270,7 +271,7 @@ export default function Enneagram() {
     } catch (error) {
       console.error("Error fetching the result: ", error);
     }
-    navigate("/results");
+    navigate("/e-result");
   };
 
   return (
@@ -361,12 +362,12 @@ export default function Enneagram() {
             {currentPage < totalPages - 1 ? (
               <button
                 onClick={goToNextPage}
-                disabled={!isCurrentPageComplete()}
-                className={`px-4 py-2 rounded ml-auto ${
-                  !isCurrentPageComplete()
-                    ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-blue-500 hover:bg-blue-600 text-white"
-                }`}
+                // disabled={!isCurrentPageComplete()}
+                // className={`px-4 py-2 rounded ml-auto ${
+                //   !isCurrentPageComplete()
+                //     ? "bg-gray-300 cursor-not-allowed"
+                //     : "bg-blue-500 hover:bg-blue-600 text-white"
+                // }`}
               >
                 Next
               </button>

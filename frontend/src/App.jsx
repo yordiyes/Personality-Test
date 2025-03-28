@@ -7,9 +7,10 @@ import Home from "./pages/Home";
 import OejtsPage from "./pages/OejtsPage";
 import Result from "./pages/Result";
 import EnneagramPage from "./pages/EnneagramPage";
+import EnneagramResult from "./pages/EnneagramResult";
 
 const URL = import.meta.env.VITE_API_URL;
-console.log(URL)
+console.log(URL);
 const questions = [
   { id: 1, left: "makes lists", right: "relies on memory" },
   { id: 2, left: "sceptical", right: "wants to believe" },
@@ -302,6 +303,7 @@ function App() {
           <Route path="/E-test" element={<Enneagram />} />
           <Route path="/results" element={<Result />} />
           <Route path="/Enneagram" element={<EnneagramPage />} />
+          <Route path="/e-result" element={<EnneagramResult />} />
         </Routes>
       </BrowserRouter>
     </div>
