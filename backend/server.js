@@ -242,17 +242,19 @@ app.get("/api/result", (req, res) => {
   res.json(results);
 });
 
+//alphabatical orderd types
 const enneagramTypes = {
-  A: "The Romantic Individualist",
-  B: "The Loyal Guardian",
-  C: "The Peaceful Mediator",
-  D: "The Supportive Advisor",
-  E: "The Successful Achiever",
-  F: "The Intellectual Thinker",
-  G: "The Entertaining Optimist",
-  H: "The Protective Challenger",
-  I: "The Moral Perfectionist",
+  A: "The Reformer",
+  B: "The Helper",
+  C: "The Achiever",
+  D: "The Individualist",
+  E: "The Investigator",
+  F: "The Loyalist",
+  G: "The Enthusiast",
+  H: "The Challenger",
+  I: "The Peacemaker",
 };
+
 
 // POST route to calculate the result based on answers
 let sortedScores = [];

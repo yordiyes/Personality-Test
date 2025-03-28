@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_API_URL;
 const enneagramTypes = {
-  A: "The Moral Perfectionist",
-  B: "The Supportive Advisor",
-  C: "The Successful Achiever",
-  D: "The Romantic Individualist",
-  E: "The Intellectual Thinker",
-  F: "The Loyal Guardian",
-  G: "The Entertaining Optimist",
-  H: "The Protective Challenger",
-  I: "The Peaceful Mediator",
+  A: "The Reformer",
+  B: "The Helper",
+  C: "The Achiever",
+  D: "The Individualist",
+  E: "The Investigator",
+  F: "The Loyalist",
+  G: "The Enthusiast",
+  H: "The Challenger",
+  I: "The Peacemaker",
 };
+
 
 const questions = {
   A: [
