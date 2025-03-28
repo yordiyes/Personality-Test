@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_API_URL;
@@ -13,7 +13,6 @@ const enneagramTypes = {
   H: "The Challenger",
   I: "The Peacemaker",
 };
-
 
 const questions = {
   A: [
@@ -183,6 +182,9 @@ export default function Enneagram() {
   const [result, setResult] = useState(null);
   const [score, setScore] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   // Flatten all questions into a single array with their type info
   const allQuestions = Object.keys(questions).reduce((acc, type) => {
@@ -226,12 +228,6 @@ export default function Enneagram() {
       setCurrentPage(currentPage + 1);
     }
   };
-
-  // const goToPrevPage = () => {
-  //   if (currentPage > 0) {
-  //     setCurrentPage(currentPage - 1);
-  //   }
-  // };
 
   const handleSubmit = async () => {
     setSubmitted(true);
@@ -348,17 +344,6 @@ export default function Enneagram() {
 
           {/* Navigation buttons */}
           <div className="flex justify-between mt-6">
-            {/* <button
-              onClick={goToPrevPage}
-              disabled={currentPage === 0}
-              className={`px-4 py-2 rounded ${
-                currentPage === 0
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-blue-500 hover:bg-blue-600 text-white"
-              }`}
-            >
-              Previous
-            </button> */}
 
             {currentPage < totalPages - 1 ? (
               <button

@@ -46,21 +46,37 @@ const EnneagramResult = () => {
     );
   }
   const getWingType = (mainType, result) => {
-    const adjacentTypes = [mainType - 1, mainType + 1];
+    // Define proper adjacent wings for each type
+    const adjacentTypesMap = {
+      1: [9, 2],
+      2: [1, 3],
+      3: [2, 4],
+      4: [3, 5],
+      5: [4, 6],
+      6: [5, 7],
+      7: [6, 8],
+      8: [7, 9],
+      9: [8, 1],
+    };
 
-    // Find the highest scoring adjacent type
+    const adjacentTypes = adjacentTypesMap[mainType];
+
     let wingType = null;
     for (let i = 1; i < result.length; i++) {
-      if (adjacentTypes.includes(enneagramTypes[result[i].type])) {
-        wingType = enneagramTypes[result[i].type];
+      const currentType = enneagramTypes[result[i].type];
+
+      if (adjacentTypes.includes(currentType)) {
+        wingType = currentType;
         break; // Stop at the first highest adjacent type
       }
     }
 
     return wingType ? `${mainType}w${wingType}` : `${mainType}`;
   };
+
   const mainType = enneagramTypes[result[0].type];
   const wing = getWingType(mainType, result);
+
 
   return (
     <div className="min-h-screen w-full font-serif p-4">
