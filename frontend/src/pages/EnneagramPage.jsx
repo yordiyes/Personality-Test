@@ -5,7 +5,7 @@ const EnneagramPage = () => {
   return (
     <div className="m-4  sm:mb-0 font-serif md:w-[60%] md:mx-auto sm:m-8 sm:shadow-2xl md:px-20">
       <div>
-        <h1 className=" text-[23px] font-semibold my-5">
+        <h1 className=" text-[23px] font-semibold my-5 pt-10">
           Eclectic Energies Enneagram Tests
         </h1>
         <p className=" font-bold font-sans">
