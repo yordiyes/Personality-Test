@@ -22,7 +22,7 @@ const Home = () => {
           to="/reasec"
           className="block p-6 bg-white shadow-lg rounded-2xl border border-gray-200 hover:shadow-xl transition duration-300"
         >
-          Holland Test
+          Holland Code Career Test
         </NavLink>
       </div>
     </div>

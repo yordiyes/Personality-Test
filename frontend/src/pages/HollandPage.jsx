@@ -18,7 +18,7 @@ const HollandPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${URL}/api/calculate`, {
+      const response = await fetch(`${URL}/api/riasec/calculate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),

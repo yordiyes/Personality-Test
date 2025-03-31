@@ -8,7 +8,7 @@ const HollandResult = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch(`${URL}/api/calculate`, {
+        const response = await fetch(`${URL}/api/riasec/calculate`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
