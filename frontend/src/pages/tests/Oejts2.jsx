@@ -69,6 +69,7 @@ function Question({ question, onChanged }) {
           <input
             type="radio"
             name={`question-${question.id}`}
+            key={num}
             value={num}
             onChange={(e) => onChanged(question.id, e.target.value)}
           />

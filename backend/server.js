@@ -116,12 +116,6 @@ app.get("/api/result", (req, res) => {
   res.json(results);
 });
 
-///
-app.get("/api/result", (req, res) => {
-  const results = calculateAverage();
-  res.json(results);
-});
-
 //alphabatical orderd types
 const enneagramTypes = {
   A: "The Reformer",
