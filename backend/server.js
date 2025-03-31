@@ -175,6 +175,7 @@ app.get("/api/scores", (req, res) => {
 });
 
 // Corrected Mapping of questions to RIASEC categories
+// Corrected Mapping of questions to RIASEC categories
 const questionMapping = {
   R: [1, 7, 14, 22, 30, 32, 37],
   I: [2, 11, 18, 21, 26, 33, 39],
@@ -184,8 +185,10 @@ const questionMapping = {
   C: [6, 9, 15, 24, 25, 35, 38],
 };
 
+let lastResult = null;
+
 // Endpoint to calculate RIASEC personality
-app.post("/calculate", (req, res) => {
+app.post("/api/calculate", (req, res) => {
   const { answers } = req.body;
 
   if (!Array.isArray(answers) || answers.length !== 42) {
@@ -201,17 +204,29 @@ app.post("/calculate", (req, res) => {
   Object.entries(questionMapping).forEach(([type, questions]) => {
     questions.forEach((q) => {
       if (answers[q - 1] === true) {
-        // Ensure correct boolean check
         scores[type] += 1;
       }
     });
   });
 
-  // Sort and get top 3 personality types
-  const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const topThree = sortedScores.slice(0, 3).map((item) => item[0]);
+  // Sort and return all personality types with scores
+  const sortedScores = Object.entries(scores)
+    .sort((a, b) => b[1] - a[1]) // Sort in descending order
+    .map(([type, score]) => ({ type, score })); // Convert to array of objects
 
-  res.json({ personality: topThree });
+  lastResult = sortedScores; // Store the latest result
+
+  res.json({ personalityScores: sortedScores });
+});
+
+// GET request to retrieve the last calculated personality scores
+app.get("/api/calculate", (req, res) => {
+  if (!lastResult) {
+    return res
+      .status(404)
+      .json({ error: "No results found. Please submit answers first." });
+  }
+  res.json({ personalityScores: lastResult });
 });
 
 // Start the server

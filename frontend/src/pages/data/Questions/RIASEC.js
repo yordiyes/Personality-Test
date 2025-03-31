@@ -54,3 +54,5 @@ const questions = {
     "I like to give speeches",
   ],
 };
+
+export default questions;
