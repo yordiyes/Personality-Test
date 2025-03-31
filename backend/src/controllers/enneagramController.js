@@ -10,10 +10,21 @@ const enneagramTypes = {
   H: "The Challenger",
   I: "The Peacemaker",
 };
+
 // POST route to calculate the result based on answers
 let sortedScores = [];
 
-exports.getScore = exports.postAnswers = (req, res) => {
+exports.getScore = (req, res) => {
+  if (sortedScores.length > 0) {
+    res.json(sortedScores); // Send the sorted scores if available
+  } else {
+    res
+      .status(404)
+      .json({ message: "Scores not found. Please submit the answers first." });
+  }
+};
+
+exports.postAnswers = (req, res) => {
   const answers = req.body.answers; // Answers from the frontend (array of objects)
 
   // Initialize scores for each Enneagram type

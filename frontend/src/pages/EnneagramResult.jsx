@@ -20,7 +20,7 @@ const EnneagramResult = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch(`${URL}/api/scores`, {
+        const response = await fetch(`${URL}/api/enneagram/scores`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -76,7 +76,6 @@ const EnneagramResult = () => {
 
   const mainType = enneagramTypes[result[0].type];
   const wing = getWingType(mainType, result);
-
 
   return (
     <div className="min-h-screen w-full font-serif p-4">
