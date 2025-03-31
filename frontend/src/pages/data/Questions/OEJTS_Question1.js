@@ -1,0 +1,76 @@
+const questions = [
+  { id: 1, left: "makes lists", right: "relies on memory" },
+  { id: 2, left: "sceptical", right: "wants to believe" },
+  { id: 3, left: "bored by time alone", right: "needs time alone" },
+  {
+    id: 4,
+    left: "accepts things as they are",
+    right: "unsatisfied with the way things are",
+  },
+  { id: 5, left: "keeps a clean room", right: "just puts stuff where ever" },
+  {
+    id: 6,
+    left: 'thinks "robotic" is an insult',
+    right: "strives to have a mechanical mind",
+  },
+  { id: 7, left: "energetic", right: "mellow" },
+  {
+    id: 8,
+    left: "prefer to take multiple choice test",
+    right: "prefer essay answers",
+  },
+  { id: 9, left: "chaotic", right: "organized" },
+  { id: 10, left: "easily hurt", right: "thick-skinned" },
+  { id: 11, left: "works best in groups", right: "works best alone" },
+  { id: 12, left: "focused on the present", right: "focused on the future" },
+  { id: 13, left: "plans far ahead", right: "plans at the last minute" },
+  { id: 14, left: "wants people's respect", right: "wants their love" },
+  {
+    id: 15,
+    left: "gets worn out by parties",
+    right: "gets fired up by parties",
+  },
+  { id: 16, left: "fits in", right: "stands out" },
+  { id: 17, left: "keeps options open", right: "commits" },
+  {
+    id: 18,
+    left: "wants to be good at fixing things",
+    right: "wants to be good at fixing people",
+  },
+  { id: 19, left: "talks more", right: "listens more" },
+  {
+    id: 20,
+    left: "when describing an event, will tell people what happened",
+    right: "when describing an event, will tell people what it meant",
+  },
+  { id: 21, left: "gets work done right away", right: "procrastinates" },
+  { id: 22, left: "follows the heart", right: "follows the head" },
+  { id: 23, left: "stays at home", right: "goes out on the town" },
+  { id: 24, left: "wants the big picture", right: "wants the details" },
+  { id: 25, left: "improvises", right: "prepares" },
+  {
+    id: 26,
+    left: "bases morality on justice",
+    right: "bases morality on compassion",
+  },
+  {
+    id: 27,
+    left: "finds it difficult to yell very loudly",
+    right: "yelling to others when they are far away comes naturally",
+  },
+  { id: 28, left: "theoretical", right: "empirical" },
+  { id: 29, left: "works hard", right: "plays hard" },
+  { id: 30, left: "uncomfortable with emotions", right: "values emotions" },
+  {
+    id: 31,
+    left: "likes to perform in front of other people",
+    right: "avoids public speaking",
+  },
+  {
+    id: 32,
+    left: 'likes to know "who?", "what?", "when?"',
+    right: 'likes to know "why?"',
+  },
+];
+
+export default questions;
