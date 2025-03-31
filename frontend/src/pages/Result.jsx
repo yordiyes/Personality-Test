@@ -8,7 +8,7 @@ const Result = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch(`${URL}/api/result`, {
+        const response = await fetch(`${URL}/api/oejts/result`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

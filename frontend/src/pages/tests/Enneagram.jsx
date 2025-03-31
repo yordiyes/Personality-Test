@@ -93,7 +93,7 @@ export default function Enneagram() {
     };
 
     try {
-      const response = await fetch(`${URL}/api/submit`, {
+      const response = await fetch(`${URL}/api/enneagram/submit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +186,6 @@ export default function Enneagram() {
 
           {/* Navigation buttons */}
           <div className="flex justify-between mt-6">
-
             {currentPage < totalPages - 1 ? (
               <button
                 onClick={goToNextPage}
