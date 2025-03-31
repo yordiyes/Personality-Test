@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-const URL = import.meta.env.VITE_API_URL;
+import React, { useEffect, useState } from "react";
 
-const enneagramTypes = {
-  A: 1,
-  B: 2,
-  C: 3,
-  D: 4,
-  E: 5,
-  F: 6,
-  G: 7,
-  H: 8,
-  I: 9,
-};
-
-const EnneagramResult = () => {
-  const [result, setResult] = React.useState(null);
+const HollandResult = () => {
+  const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const URL = import.meta.env.VITE_API_URL; // API URL
 
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch(`${URL}/api/enneagram/scores`, {
+        const response = await fetch(`${URL}/api/enneagram/riasec/calculate`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -30,110 +18,79 @@ const EnneagramResult = () => {
         }
 
         const data = await response.json();
-        setResult(data);
+        if (data.personalityScores) {
+          setResult(data.personalityScores);
+        } else {
+          setResult([]);
+        }
       } catch (err) {
         console.error(err);
         alert("Error fetching your results.");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchResult();
-  }, []);
+  }, [URL]);
 
-  if (!result) {
-    return (
-      <p className="text-center mt-10 text-gray-600">Loading results...</p>
-    );
-  }
-  const getWingType = (mainType, result) => {
-    // Define proper adjacent wings for each type
-    const adjacentTypesMap = {
-      1: [9, 2],
-      2: [1, 3],
-      3: [2, 4],
-      4: [3, 5],
-      5: [4, 6],
-      6: [5, 7],
-      7: [6, 8],
-      8: [7, 9],
-      9: [8, 1],
-    };
+  if (loading) return <p className="text-center text-lg">Loading...</p>;
+  if (result.length === 0)
+    return <p className="text-center text-red-500">No results found.</p>;
 
-    const adjacentTypes = adjacentTypesMap[mainType];
+  // Sort scores in descending order
+  const sortedScores = [...result].sort((a, b) => b.score - a.score);
 
-    let wingType = null;
-    for (let i = 1; i < result.length; i++) {
-      const currentType = enneagramTypes[result[i].type];
-
-      if (adjacentTypes.includes(currentType)) {
-        wingType = currentType;
-        break; // Stop at the first highest adjacent type
-      }
-    }
-
-    return wingType ? `${mainType}w${wingType}` : `${mainType}`;
-  };
-
-  const mainType = enneagramTypes[result[0].type];
-  const wing = getWingType(mainType, result);
+  // Determine Holland Code (top 3 personality types)
+  const hollandCode = sortedScores
+    .slice(0, 3)
+    .map((item) => item.type)
+    .join("");
 
   return (
-    <div className="min-h-screen w-full font-serif p-4">
-      <div className="sm:mb-0 pb-10  md:w-[80%] lg:w-[60%] md:mx-auto sm:px-5 sm:m-8 sm:shadow-2xl md:px-10 lg:px-20">
-        <h2 className="text-2xl font-bold text-gray-800">
-          Enneagram Test Results
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <h1 className="text-2xl font-bold mb-4 text-center">
+        Your Holland Code (RIASEC) Results
+      </h1>
+      <div className="bg-gray-100 p-4 rounded-lg">
+        <h2 className="text-xl font-semibold text-center mb-2">
+          Your Personality Type:
         </h2>
+        <p className="text-center text-2xl font-bold text-blue-600">
+          {hollandCode}
+        </p>
+      </div>
+      <h2 className="text-lg font-semibold mt-4 mb-2">Category Scores:</h2>
+      <ul className="list-disc pl-5">
+        {sortedScores.map((item) => (
+          <li key={item.type} className="text-lg">
+            <span className="font-bold">{item.type}:</span> {item.score}
+          </li>
+        ))}
+      </ul>
+      console.log("Chart Data:", sortedScores);
+      {/* Chart Section */}
+      <div className="mt-6">
+        <h2 className="text-lg font-semibold text-center mb-4">
+          Personality Score Distribution
+        </h2>
+        {sortedScores.length > 0 ? (
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={sortedScores}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="type" tick={{ fontSize: 14 }} />
 
-        <p className="mt-4 text-gray-700 text-[15px]">
-          Your Enneagram type is a representation of your core motivations,
-          fears, and desires. This test provides insights into your personality
-          and how you relate to the world around you.
-        </p>
-        <h3 className="font-semibold text-lg mt-7">
-          Your Type: <em>{result[0].typeName}</em>
-        </h3>
-        <div className=" border-[1px] sm:mx-10 p-6 mb-10 mt-4 bg-gray-100">
-          <p className="text-gray-700 text-[15px]">
-            You are most likely a{" "}
-            <strong>type {enneagramTypes[result[0].type]}</strong>.{" "}
-            <em>( {result[0].typeName} )</em>.
-          </p>
-          <p className="text-[15px] mt-2">
-            Taking wings into account, you seem to be a <strong>{wing}</strong>
-          </p>
-          <div className="p-4 py-10 sm:px-8 md:px-20">
-            {result.map(({ type, score }, index) => {
-              const progressBarWidth = (score / 70) * 100; // Calculate the percentage of the score based on a max of 70
-              return (
-                <div key={type} className="mb-1 relative">
-                  <div className="w-full bg-white h-6 flex items-center">
-                    <div
-                      className="bg-gray-300 h-6 px-2 text-xs font-semibold"
-                      style={{ width: `${Math.min(progressBarWidth, 100)}%` }} // Ensure the width doesn't exceed 100%
-                    >
-                      type {enneagramTypes[result[index].type]}: {score}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <p>
-          No personality test is completely accurate. Although several measures
-          were taken to make this test as accurate as possible, there's always a
-          chance that you are not typed correctly by it. Therefore, when
-          deciding which Enneagram type and wing you are, you might also want to
-          consider the types with the highest test scores on the lists below.
-        </p>
-        <div className="my-5">
-          <NavLink to="/" className="bg-neutral-300 p-2 border-[1px] mt-3">
-            Home Page
-          </NavLink>
-        </div>
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="score" fill="#3b82f6" radius={[5, 5, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        ) : (
+          <p className="text-center text-gray-500">No data available.</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default EnneagramResult;
+export default HollandResult;
