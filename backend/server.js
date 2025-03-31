@@ -7,7 +7,13 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: "https://personality-test-up87.vercel.app", // Allow this specific origin
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 let result1 = 0;
 let result2 = 0;
 // Scoring function for the OEJTS test with normalized results (-2 to 2)
