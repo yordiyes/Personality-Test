@@ -13,7 +13,7 @@ const enneagramTypes = {
 // POST route to calculate the result based on answers
 let sortedScores = [];
 
-exports.getScore = exports.postAnswers = (req, res) => {
+exports.getScore = (req, res) => {
   const answers = req.body.answers; // Answers from the frontend (array of objects)
 
   // Initialize scores for each Enneagram type
