@@ -7,12 +7,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-const corsOptions = {
-  origin: "https://personality-test-up87.vercel.app", // Allow this specific origin
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 let result1 = 0;
 let result2 = 0;
