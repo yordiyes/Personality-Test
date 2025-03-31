@@ -44,13 +44,13 @@ function calculateScores2(answers) {
   const Q = answers; // Array of answers
 
   // Calculate raw scores based on question assignments
-  const IE_raw = 21 + Q[1] - Q[2] + Q[3] - Q[4] + Q[5] - Q[6] - Q[7];
-  const SN_raw = 21 + Q[8] - Q[9] + Q[10] - Q[11] + Q[12] - Q[13] - Q[14];
-  const FT_raw = 21 - Q[15] + Q[16] - Q[17] + Q[18] - Q[19] + Q[20] + Q[21];
-  const JP_raw = 21 + Q[22] - Q[23] + Q[24] - Q[25] + Q[26] - Q[27] - Q[28];
+  const IE_raw = 26 + Q[1] - Q[2] + Q[3] - Q[4] + Q[5] - Q[6] - Q[7];
+  const SN_raw = 10 + Q[8] - Q[9] + Q[10] - Q[11] + Q[12] - Q[13] - Q[14];
+  const FT_raw = 26 - Q[15] + Q[16] - Q[17] + Q[18] - Q[19] + Q[20] + Q[21];
+  const JP_raw = 16 + Q[22] - Q[23] + Q[24] - Q[25] + Q[26] - Q[27] - Q[28];
 
   // Normalize scores to range [-2, 2]
-  const normalize = (score) => (score - 21) / 10.5;
+  const normalize = (score) => (score - 20) / 7;
 
   const IE = normalize(IE_raw);
   const SN = normalize(SN_raw);
@@ -128,7 +128,6 @@ const enneagramTypes = {
   H: "The Challenger",
   I: "The Peacemaker",
 };
-
 
 // POST route to calculate the result based on answers
 let sortedScores = [];
