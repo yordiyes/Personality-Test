@@ -8,6 +8,7 @@ import OejtsPage from "./pages/OejtsPage";
 import Result from "./pages/Result";
 import EnneagramPage from "./pages/EnneagramPage";
 import EnneagramResult from "./pages/EnneagramResult";
+import HollandPage from "./pages/HollandPage";
 
 const URL = import.meta.env.VITE_API_URL;
 console.log(URL);
@@ -305,6 +306,7 @@ function App() {
           <Route path="/results" element={<Result />} />
           <Route path="/Enneagram" element={<EnneagramPage />} />
           <Route path="/e-result" element={<EnneagramResult />} />
+          <Route path="/reasec" element={<HollandPage />} />
         </Routes>
       </BrowserRouter>
     </div>
