@@ -10,6 +10,7 @@ import EnneagramPage from "./pages/EnneagramPage";
 import EnneagramResult from "./pages/EnneagramResult";
 import questions from "./pages/data/Questions/OEJTS_Question1";
 import questions2 from "./pages/data/Questions/OEJTS_Question2";
+import HollandPage from "./pages/HollandPage";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -98,6 +99,7 @@ function App() {
           <Route path="/results" element={<Result />} />
           <Route path="/Enneagram" element={<EnneagramPage />} />
           <Route path="/e-result" element={<EnneagramResult />} />
+          <Route path="/reasec" element={<HollandPage />} />
         </Routes>
       </BrowserRouter>
     </div>
