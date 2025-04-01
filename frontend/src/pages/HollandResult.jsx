@@ -78,7 +78,7 @@ const HollandResult = () => {
     .join("");
 
   return (
-    <div className="max-w-5xl mx-auto sm:p-6 py-6 px-3 bg-white shadow-lg rounded-lg font-serif">
+    <div className="max-w-6xl mx-auto sm:p-6 py-6 bg-white shadow-lg rounded-lg font-serif">
       <h1 className=" text-xl sm:text-2xl font-bold mb-4 text-center">
         Your Holland Code (RIASEC) Results
       </h1>
@@ -96,7 +96,7 @@ const HollandResult = () => {
           <span className="text-gray-500"> ({hollandCode})</span>
         </p>
         <div className=" text-lg grid lg:grid-cols-2  items-center mt-4">
-          <div className="m-5 sm:mt-20">
+          <div className="m-5 mb-0 sm:mt-20">
             <div>
               <h2 className="text-xl font-bold">
                 {typeNames[hollandCode[0]]} Personality Type:
@@ -117,8 +117,8 @@ const HollandResult = () => {
             </div>
           </div>
           {/* Chart Section */}
-          <div className="m-5 sm:ml-[-4.5rem]">
-            <div className="flex flex-col sm:flex-row items-center">
+          <div className=" sm:ml-[-1.5rem]">
+            <div className="flex flex-col sm:flex-row items-center mt-[-3.2rem] sm:mt-0">
               {/* Pie Chart */}
               <ResponsiveContainer width={400} height={400}>
                 <PieChart>
@@ -155,7 +155,7 @@ const HollandResult = () => {
               </ResponsiveContainer>
 
               {/* Legend (beside the chart) */}
-              <div className="ml-4 mt-4 sm:mt-0 hidden sm:block">
+              <div className="mt-4 sm:mt-0 hidden sm:block">
                 <h3 className="text-md font-semibold mb-2 text-center">
                   Legend
                 </h3>
