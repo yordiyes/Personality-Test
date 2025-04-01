@@ -8,6 +8,7 @@ import {
   Cell,
   LabelList,
 } from "recharts";
+import { NavLink } from "react-router-dom";
 
 const typeNames = {
   R: "Realistic",
@@ -115,7 +116,6 @@ const HollandResult = () => {
               </ul>
             </div>
           </div>
-
           {/* Chart Section */}
           <div className="m-5 sm:ml-[-4.5rem]">
             <div className="flex flex-col sm:flex-row items-center">
@@ -178,7 +178,12 @@ const HollandResult = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </div>{" "}
+        </div>
+        <div className="m-5">
+          <NavLink to="/" className="bg-neutral-300 p-2 border-[1px] mt-3">
+            Home Page
+          </NavLink>
         </div>
       </div>
     </div>
