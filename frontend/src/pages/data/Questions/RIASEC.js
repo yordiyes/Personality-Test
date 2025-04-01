@@ -33,16 +33,16 @@ const questions = {
     "I am interested in healing people",
     "I like to get into discussions about issues",
     "I like helping people",
-    "I like to give speeches",
+    "I enjoy learning about other cultures",
   ],
   E: [
     "I am an ambitious person, I set goals for myself",
     "I like selling things",
     "I am quick to take on new responsibilities",
     "I would like to start my own business",
-    "I would like to work in an office",
     "I like to lead",
     "I like to influence or persuade people",
+    "I like to give speeches",
   ],
   C: [
     "I like to organize things (files, desks/offices)",
@@ -51,7 +51,7 @@ const questions = {
     "I pay attention to details",
     "I like to do filing or typing",
     "I am good at keeping records of my work",
-    "I like to give speeches",
+    "I would like to work in an office",
   ],
 };
 
