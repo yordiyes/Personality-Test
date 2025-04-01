@@ -94,15 +94,6 @@ const HollandResult = () => {
             .join(", ")}
           <span className="text-gray-500"> ({hollandCode})</span>
         </p>
-
-        {/* <h2 className="text-lg font-semibold mt-4 mb-2">Category Scores:</h2> */}
-        {/* <ul className="list-disc pl-5">
-        {sortedScores.map((item) => (
-          <li key={item.type} className="text-lg">
-            <span className="font-bold">{item.type}:</span> {item.percentage}%
-          </li>
-        ))}
-      </ul> */}
         <div className=" text-lg grid lg:grid-cols-2  items-center mt-4">
           <div className="m-5 sm:mt-20">
             <div>
