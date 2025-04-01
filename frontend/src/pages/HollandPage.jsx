@@ -49,7 +49,7 @@ const HollandPage = () => {
     });
   }
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg font-serif">
       <h1 className="text-2xl font-bold mb-4">
         Holland Code (RIASEC) Career Test
       </h1>
