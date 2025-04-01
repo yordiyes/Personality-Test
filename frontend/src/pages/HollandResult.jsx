@@ -1,132 +1,13 @@
 import React, { useEffect, useState } from "react";
+import hollandDescriptions from "./data/Descriptions/HollandDescription";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
   Tooltip,
-  CartesianGrid,
   ResponsiveContainer,
   PieChart,
   Pie,
   Cell,
   LabelList,
 } from "recharts";
-const hollandDescriptions = {
-  RIA: {
-    description:
-      "Innovative problem-solvers who enjoy hands-on work and scientific exploration. They combine technical skills with analytical thinking.",
-    careers: [
-      "Engineer",
-      "Lab Technician",
-      "Archaeologist",
-      "Automotive Designer",
-    ],
-  },
-  RIS: {
-    description:
-      "Detail-oriented individuals who enjoy practical work while also helping others in structured ways.",
-    careers: [
-      "Physical Therapist",
-      "Occupational Therapist",
-      "Medical Technician",
-    ],
-  },
-  RIE: {
-    description:
-      "Independent thinkers who love to experiment and create solutions with a strong business sense.",
-    careers: ["Entrepreneur", "Product Designer", "Industrial Engineer"],
-  },
-  RIC: {
-    description:
-      "Technical and detail-focused individuals who enjoy structured tasks and data-driven decision-making.",
-    careers: ["IT Specialist", "Systems Analyst", "Quality Control Inspector"],
-  },
-  RAS: {
-    description:
-      "Creative and hands-on workers who enjoy artistic expression in practical settings.",
-    careers: ["Interior Designer", "Fashion Designer", "Craftsperson"],
-  },
-  RAE: {
-    description:
-      "Innovators who excel in leadership while applying practical and artistic skills.",
-    careers: ["Marketing Director", "Art Director", "Advertising Manager"],
-  },
-  RAC: {
-    description:
-      "Efficient workers who prefer structured, hands-on tasks with a focus on organization.",
-    careers: [
-      "Construction Manager",
-      "Architectural Drafter",
-      "Project Coordinator",
-    ],
-  },
-  RSE: {
-    description:
-      "Active and social individuals who like solving real-world problems while engaging with people.",
-    careers: ["Coach", "Firefighter", "Police Officer"],
-  },
-  RSC: {
-    description:
-      "Hands-on workers who excel in structured environments and problem-solving roles.",
-    careers: ["Mechanic", "Electrician", "Plumber"],
-  },
-  REC: {
-    description:
-      "Practical and logical thinkers who excel in technical work and data organization.",
-    careers: ["Database Administrator", "Logistics Manager", "Surveyor"],
-  },
-  IAS: {
-    description:
-      "Curious and creative individuals who thrive in research and interpersonal engagement.",
-    careers: ["Psychologist", "Research Scientist", "University Professor"],
-  },
-  IAE: {
-    description:
-      "Innovators who apply scientific thinking to leadership and communication.",
-    careers: ["Business Consultant", "Market Research Analyst", "Economist"],
-  },
-  IAC: {
-    description:
-      "Detail-oriented thinkers who prefer structured research and technical analysis.",
-    careers: ["Statistician", "Data Scientist", "Technical Writer"],
-  },
-  ISE: {
-    description:
-      "Empathetic and curious professionals who enjoy working with people and solving social issues.",
-    careers: ["Social Worker", "Counselor", "Public Health Analyst"],
-  },
-  ISC: {
-    description:
-      "Logical and structured individuals who prefer research and administrative work.",
-    careers: ["Librarian", "Accountant", "Records Manager"],
-  },
-  IEC: {
-    description:
-      "Methodical and data-driven professionals who focus on efficiency and structured research.",
-    careers: ["Actuary", "Financial Analyst", "Compliance Officer"],
-  },
-  ASE: {
-    description:
-      "Outgoing and creative individuals who enjoy artistic expression and social engagement.",
-    careers: ["Actor", "Musician", "Public Relations Specialist"],
-  },
-  ASC: {
-    description:
-      "Creative yet organized individuals who thrive in structured artistic roles.",
-    careers: ["Graphic Designer", "Editor", "Event Planner"],
-  },
-  AEC: {
-    description:
-      "Visionary professionals who merge creativity with business acumen and organization.",
-    careers: ["Art Director", "Creative Director", "Entrepreneur"],
-  },
-  SEC: {
-    description:
-      "Socially responsible individuals who enjoy working in organized, structured environments.",
-    careers: ["Human Resources Manager", "Administrative Assistant", "Teacher"],
-  },
-};
 
 const typeNames = {
   R: "Realistic",
@@ -140,8 +21,9 @@ const typeNames = {
 const COLORS = [
   "#8884d8",
   "#82ca9d",
-  "#ffc658",
   "#ff7300",
+  "#ffc658",
+
   "#ff6384",
   "#36a2eb",
 ];
@@ -167,7 +49,7 @@ const HollandResult = () => {
         setResult(
           data.personalityScores.map((item) => ({
             ...item,
-            percentage: ((item.score / 7) * 100).toFixed(2), // Convert to percentage
+            percentage: Number(((item.score / 7) * 100).toFixed(2)), // Convert to number
           }))
         );
       } catch (err) {
@@ -195,12 +77,12 @@ const HollandResult = () => {
     .join("");
 
   return (
-    <div className="max-w-2xl mx-auto sm:p-6 py-6 px-3 bg-white shadow-lg rounded-lg">
+    <div className="max-w-5xl mx-auto sm:p-6 py-6 px-3 bg-white shadow-lg rounded-lg font-serif">
       <h1 className=" text-xl sm:text-2xl font-bold mb-4 text-center">
         Your Holland Code (RIASEC) Results
       </h1>
 
-      <div className="bg-gray-100 p-4 rounded-lg">
+      <div className="bg-gray-100 py-4 rounded-lg">
         <h2 className="text-xl font-semibold text-center mb-2">
           Your Personality Type:
         </h2>
@@ -221,54 +103,92 @@ const HollandResult = () => {
           </li>
         ))}
       </ul> */}
-        {hollandDescriptions[hollandCode] && (
-          <div className="m-5 mt-20">
-            <h2 className="text-xl font-bold">
-              {hollandCode} Personality Type:
-            </h2>
-            <p className="mt-4 text-lg  italic">
-              {hollandDescriptions[hollandCode].description}
-            </p>
-
-            <h3 className="mt-4 text-xl font-semibold">Career Suggestions:</h3>
-            <ul className="mt-2 list-disc list-inside">
-              {hollandDescriptions[hollandCode].careers.map((career, index) => (
-                <li key={index} className="text-lg">
-                  {career}
-                </li>
-              ))}
-            </ul>
+        <div className=" text-lg grid lg:grid-cols-2  items-center mt-4">
+          <div className="m-5 sm:mt-20">
+            <div>
+              <h2 className="text-xl font-bold">
+                {typeNames[hollandCode[0]]} Personality Type:
+              </h2>
+              <p className="mt-4 ">
+                {hollandDescriptions[hollandCode[0]]?.description}
+              </p>
+              <h3 className="mt-4 text-xl font-semibold">
+                Career Suggestions:
+              </h3>
+              <ul className="mt-2 list-disc list-inside italic text-sm grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {hollandDescriptions[hollandCode[0]]?.careers.map(
+                  (career, index) => (
+                    <li key={index}>{career}</li>
+                  )
+                )}
+              </ul>
+            </div>
           </div>
-        )}
-      </div>
 
-      {/* Chart Section */}
-      <div className="mt-6">
-        <h2 className="text-lg font-semibold text-center mb-4">
-          Personality Score Distribution
-        </h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={sortedScores}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="type" />
-            <YAxis unit="%" />
-            <Tooltip
-              formatter={(value, name, props) => [
-                `${value}%`,
-                typeNames[props.payload.type] || name,
-              ]}
-            />
-            <Bar dataKey="percentage" fill="#3b82f6" radius={[5, 5, 0, 0]}>
-              <LabelList
-                dataKey="percentage"
-                position="top"
-                fill="#000"
-                fontSize={14}
-                fontWeight="bold"
-              />
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+          {/* Chart Section */}
+          <div className="m-5 sm:ml-[-4.5rem]">
+            <div className="flex flex-col sm:flex-row items-center">
+              {/* Pie Chart */}
+              <ResponsiveContainer width={400} height={400}>
+                <PieChart>
+                  <Pie
+                    className=" text-sm"
+                    data={sortedScores.filter((item) => item.percentage > 0)} // Hide zero scores
+                    dataKey="percentage"
+                    nameKey="type"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={120}
+                    fill="#3b82f6"
+                    label={
+                      ({ name, percent }) =>
+                        `${name}: ${(percent * 100).toFixed(0)}%` // Display type and percentage inside the pie slices
+                    }
+                  >
+                    {sortedScores
+                      .filter((item) => item.percentage > 0)
+                      .map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value, name, props) => [
+                      `${value}%`,
+                      typeNames[name],
+                    ]} // Shows percentage & type in tooltip
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+
+              {/* Legend (beside the chart) */}
+              <div className="ml-4 mt-4 sm:mt-0 hidden sm:block">
+                <h3 className="text-md font-semibold mb-2 text-center">
+                  Legend
+                </h3>
+                <ul className="space-y-1 fonmo">
+                  {sortedScores
+                    .filter((item) => item.percentage > 0)
+                    .map((entry, index) => (
+                      <li key={entry.type} className="flex items-center">
+                        <span
+                          className="w-4 h-4 inline-block mr-2 rounded"
+                          style={{
+                            backgroundColor: COLORS[index % COLORS.length],
+                          }}
+                        ></span>
+                        <span className="text-sm">
+                          {entry.type}: <em>{typeNames[entry.type]}</em>
+                        </span>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
