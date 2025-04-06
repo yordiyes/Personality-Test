@@ -24,6 +24,12 @@ const Home = () => {
         >
           Holland Code Career Test
         </NavLink>
+        <NavLink
+          to="/B-test"
+          className="block p-6 bg-white shadow-lg rounded-2xl border border-gray-200 hover:shadow-xl transition duration-300"
+        >
+          Big Five Test
+        </NavLink>
       </div>
     </div>
   );

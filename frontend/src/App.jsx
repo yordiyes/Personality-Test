@@ -10,9 +10,12 @@ import EnneagramPage from "./pages/EnneagramPage";
 import EnneagramResult from "./pages/EnneagramResult";
 import questions from "./pages/data/Questions/OEJTS_Question1";
 import questions2 from "./pages/data/Questions/OEJTS_Question2";
+import questions3 from "./pages/data/Questions/BigF_Questions";
 import HollandPage from "./pages/HollandPage";
 import HollandResult from "./pages/HollandResult";
-
+import BigFivePage from "./pages/BigFivePage";
+import BigFive from "./pages/tests/BigFive";
+import BigFiveResult from "./pages/BigFiveResult";
 const URL = import.meta.env.VITE_API_URL;
 
 function App() {
@@ -102,6 +105,12 @@ function App() {
           <Route path="/e-result" element={<EnneagramResult />} />
           <Route path="/reasec" element={<HollandPage />} />
           <Route path="/h-result" element={<HollandResult />} />
+          <Route path="/B-test" element={<BigFivePage />} />
+          <Route
+            path="/B-test/test"
+            element={<BigFive questions={questions3} />}
+          />
+          <Route path="/bigfive-result" element={<BigFiveResult />} />
         </Routes>
       </BrowserRouter>
     </div>
