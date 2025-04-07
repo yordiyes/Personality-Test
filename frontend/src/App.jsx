@@ -10,12 +10,13 @@ import EnneagramPage from "./pages/EnneagramPage";
 import EnneagramResult from "./pages/EnneagramResult";
 import questions from "./pages/data/Questions/OEJTS_Question1";
 import questions2 from "./pages/data/Questions/OEJTS_Question2";
-import questions3 from "./pages/data/Questions/BigF_Questions";
+import questions3 from "./pages/data/Questions/bigfive-questions";
 import HollandPage from "./pages/HollandPage";
 import HollandResult from "./pages/HollandResult";
 import BigFivePage from "./pages/BigFivePage";
 import BigFive from "./pages/tests/BigFive";
 import BigFiveResult from "./pages/BigFiveResult";
+
 const URL = import.meta.env.VITE_API_URL;
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   const handleChange = (questionId, value) => {
     setAnswers((prev) => ({ ...prev, [questionId]: parseInt(value) }));
   };
+
   const handleSubmit2 = async (e) => {
     e.preventDefault();
     if (Object.keys(answers).length !== questions2.length) {
@@ -70,6 +72,23 @@ function App() {
     }
   };
 
+  // Flatten the questions3 object into a single array
+  const flattenQuestions = (questions) => {
+    const flattened = [];
+
+    Object.keys(questions).forEach((trait) => {
+      if (Array.isArray(questions[trait])) {
+        questions[trait].forEach((question) => {
+          flattened.push({ ...question, trait });
+        });
+      }
+    });
+
+    return flattened;
+  };
+
+  const flattenedQuestions = flattenQuestions(questions3);
+
   return (
     <div className="app-container">
       <BrowserRouter>
@@ -98,7 +117,6 @@ function App() {
               />
             }
           />
-
           <Route path="/E-test" element={<Enneagram />} />
           <Route path="/results" element={<Result />} />
           <Route path="/Enneagram" element={<EnneagramPage />} />
@@ -108,7 +126,7 @@ function App() {
           <Route path="/B-test" element={<BigFivePage />} />
           <Route
             path="/B-test/test"
-            element={<BigFive questions={questions3} />}
+            element={<BigFive questions={flattenedQuestions} />}
           />
           <Route path="/bigfive-result" element={<BigFiveResult />} />
         </Routes>

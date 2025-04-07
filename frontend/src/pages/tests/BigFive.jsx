@@ -1,28 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import QuestionList from "./QuestionList"; // This is where the individual questions are rendered
+
+const QUESTIONS_PER_PAGE = 5;
 
 const BigFive = ({ questions, onSubmitted }) => {
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState({}); // Store the answers keyed by question id
+  const [page, setPage] = useState(0); // Track the current page for multi-page questions
 
-  // Handle when a radio input is changed
+  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE); // Total number of pages
+
+  // Function to handle changes in the answers for each question
   const handleAnswerChange = (questionId, value) => {
     setAnswers((prev) => ({
       ...prev,
-      [questionId]: value,
+      [questionId]: value, // Update the answer for this question
     }));
   };
 
-  // Submit Handler
+  // Submit function to process the answers and calculate the scores
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.keys(answers).length !== questions.length) {
+    // Check if all questions are answered
+    const unanswered = questions.filter((q) => !answers[q.id]);
+    if (unanswered.length > 0) {
       alert("Please answer all questions before submitting.");
       return;
     }
 
-    // Compute trait averages
+    // Initialize the scores for each Big Five trait
     const traitScores = {
       Openness: [],
       Conscientiousness: [],
@@ -31,89 +39,103 @@ const BigFive = ({ questions, onSubmitted }) => {
       Neuroticism: [],
     };
 
-    questions.forEach((question) => {
-      const trait = question.trait;
-      if (trait && answers[question.id]) {
-        traitScores[trait].push(answers[question.id]);
-      }
+    // Categorize the answers by trait
+    questions.forEach((q) => {
+      if (answers[q.id]) traitScores[q.trait].push(answers[q.id]);
     });
 
+    // Calculate the average score for each trait
     const traitAverages = Object.entries(traitScores).map(([trait, scores]) => {
       const average = scores.reduce((sum, val) => sum + val, 0) / scores.length;
-      return { trait, score: Math.round(average * 20) }; // scale 1–5 to 0–100
+      return { trait, score: Math.round(average * 20) }; // Convert to a scale of 0-100
     });
 
-    // Call parent submission if needed
+    // Pass the results to the parent (if any)
     if (onSubmitted) onSubmitted(e);
 
-    // Navigate to result page
+    // Navigate to the result page with the calculated scores
     navigate("/bigfive-result", { state: { result: traitAverages } });
   };
 
+  // Slice the questions to display only the current page's questions
+  const currentQuestions = questions.slice(
+    page * QUESTIONS_PER_PAGE,
+    (page + 1) * QUESTIONS_PER_PAGE
+  );
+
   return (
-    <div className="m-4 sm:mb-0 pb-10 font-serif md:w-[60%] md:mx-auto sm:px-5 sm:m-8 sm:shadow-2xl md:px-10 lg:px-20">
-      <h1 className="font-bold text-xl">Big Five Personality Test</h1>
-      <p className="my-4">
-        <span className="font-bold">Instructions: </span>
+    <div className="max-w-3xl mx-auto py-10 px-5 font-serif">
+      <h1 className="text-2xl md:text-3xl font-bold text-center text-indigo-700 mb-6">
+        Big Five Personality Test
+      </h1>
+      <p className="text-center text-gray-600 mb-8 font-semibold">
         To take the Big Five personality assessment, rate each statement
         according to how well it describes you. Base your ratings on how you
         really are, not how you would like to be.
       </p>
+
+      {/* Information about answering the questions */}
+      <div className="bg-yellow-400 py-3 px-4 rounded-md text-center font-semibold text-black mb-5">
+        INACCURATE • NEUTRAL • ACCURATE
+      </div>
+
       <form onSubmit={handleSubmit}>
+        {/* Render the current page's questions */}
         <QuestionList
-          questions={questions}
-          onChanged={handleAnswerChange}
+          questions={currentQuestions}
           answers={answers}
+          onChanged={handleAnswerChange}
         />
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="px-5 py-2 bg-blue-800 p-2 border-[1px] mt-5 my-10 text-white"
-          >
-            Submit Answers
-          </button>
+
+        {/* Step indicator and navigation buttons */}
+        <div className="flex flex-col items-center mt-10 space-y-4">
+          <p className="text-lg font-medium text-gray-700">
+            Step {page + 1} of {totalPages}
+          </p>
+
+          <div className="flex gap-2">
+            {[...Array(totalPages)].map((_, idx) => (
+              <span
+                key={idx}
+                className={`w-3 h-3 rounded-full transition ${
+                  idx === page ? "bg-rose-400" : "bg-orange-200"
+                }`}
+              ></span>
+            ))}
+          </div>
+
+          <div className="flex gap-4 mt-4">
+            {page > 0 && (
+              <button
+                type="button"
+                onClick={() => setPage(page - 1)}
+                className="border border-slate-800 px-6 py-2 text-sm tracking-widest uppercase hover:bg-gray-100 transition duration-200"
+              >
+                &lt; Back
+              </button>
+            )}
+
+            {page < totalPages - 1 ? (
+              <button
+                type="button"
+                onClick={() => setPage(page + 1)}
+                className="border border-slate-800 px-6 py-2 text-sm tracking-widest uppercase hover:bg-gray-100 transition duration-200"
+              >
+                Next Step &gt;
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="bg-green-600 text-white px-6 py-2 text-sm tracking-widest uppercase rounded-md hover:bg-green-700 transition duration-200"
+              >
+                Submit Answers
+              </button>
+            )}
+          </div>
         </div>
       </form>
     </div>
   );
 };
-
-function QuestionList({ questions, onChanged }) {
-  return (
-    <div className="mx-auto">
-      <div className="text-right text-[13px] sm:text-sm sm:space-x-6 sm:mr-5 space-x-2 mr-6">
-        <span>Inaccurate</span>
-        <span>Neutral</span>
-        <span>Accurate</span>
-      </div>
-      {questions.map((question) => (
-        <Question key={question.id} question={question} onChanged={onChanged} />
-      ))}
-    </div>
-  );
-}
-
-function Question({ question, onChanged }) {
-  return (
-    <div className="my-2 grid grid-cols-3 bg-gray-200 items-center mx-1">
-      <label className="text-sm sm:text-[15px] font-medium text-gray-700 col-span-2 px-1 pr-3">
-        {question.text}
-      </label>
-
-      {/* Radio Buttons */}
-      <div className="flex items-center justify-between sm:px-2 -ml-1">
-        {[1, 2, 3, 4, 5].map((num) => (
-          <input
-            type="radio"
-            name={`question-${question.id}`}
-            key={num}
-            value={num}
-            onChange={(e) => onChanged(question.id, parseInt(e.target.value))}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default BigFive;

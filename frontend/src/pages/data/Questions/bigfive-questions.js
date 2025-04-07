@@ -1,4 +1,4 @@
-const questions = {
+const questions3 = {
   openness: [
     { id: 2, text: "I believe in the importance of art.", reverse: false },
     { id: 6, text: "I have a vivid imagination.", reverse: false },
@@ -11,7 +11,7 @@ const questions = {
     { id: 41, text: "I like to reflect and play with ideas.", reverse: false },
     { id: 51, text: "I have difficulty understanding abstract ideas.", reverse: true },
     { id: 57, text: "I enjoy thinking about abstract concepts.", reverse: false },
-    { id: 60, text: "I am full of ideas.", reverse: false }
+    { id: 60, text: "I am full of ideas.", reverse: false },
   ],
 
   conscientiousness: [
@@ -26,7 +26,7 @@ const questions = {
     { id: 43, text: "I leave my belongings around.", reverse: true },
     { id: 50, text: "I pay attention to details.", reverse: false },
     { id: 55, text: "I leave a mess in my room.", reverse: true },
-    { id: 58, text: "I do things efficiently.", reverse: false }
+    { id: 58, text: "I do things efficiently.", reverse: false },
   ],
 
   extraversion: [
@@ -41,7 +41,7 @@ const questions = {
     { id: 45, text: "I talk to a lot of different people at parties.", reverse: false },
     { id: 47, text: "I keep in the background.", reverse: true },
     { id: 53, text: "I don’t talk a lot.", reverse: true },
-    { id: 59, text: "I tend to be quiet.", reverse: true }
+    { id: 59, text: "I tend to be quiet.", reverse: true },
   ],
 
   agreeableness: [
@@ -55,7 +55,7 @@ const questions = {
     { id: 37, text: "I criticize other people.", reverse: true },
     { id: 44, text: "I insult people.", reverse: true },
     { id: 48, text: "I sympathize with others’ feelings.", reverse: false },
-    { id: 54, text: "I am not really interested in others.", reverse: true }
+    { id: 54, text: "I am not really interested in others.", reverse: true },
   ],
 
   neuroticism: [
@@ -71,8 +71,8 @@ const questions = {
     { id: 22, text: "I am relaxed most of the time.", reverse: true },
     { id: 24, text: "I get stressed out easily.", reverse: false },
     { id: 52, text: "I have frequent mood swings.", reverse: false },
-    { id: 56, text: "I often feel blue for no reason.", reverse: false }
-  ]
+    { id: 56, text: "I often feel blue for no reason.", reverse: false },
+  ],
 };
 
-module.export = questions;
+export default questions3;
