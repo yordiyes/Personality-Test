@@ -1,21 +1,19 @@
 // Mapping of questions to Big Five traits
 const questionMapping = {
-    O: [2, 6, 21, 26, 28, 30, 36, 39, 41, 51, 57, 60],  // Openness
-    C: [5, 11, 17, 23, 29, 31, 35, 40, 43, 50, 55, 58], // Conscientiousness
-    E: [7, 9, 13, 18, 27, 32, 34, 38, 45, 47, 53, 59],  // Extraversion
-    A: [1, 4, 10, 12, 15, 22, 33, 37, 44, 48, 54],      // Agreeableness
-    N: [3, 8, 14, 16, 19, 20, 24, 25, 42, 46, 49, 52, 56] // Neuroticism
-  };
-  
+  O: [2, 6, 21, 26, 28, 30, 36, 39, 41, 46, 51, 56],           // Openness
+  C: [5, 11, 17, 22, 23, 25, 29, 31, 35, 40, 42, 47, 52, 57],  // Conscientiousness
+  E: [7, 9, 13, 18, 27, 32, 34, 38, 43, 48, 53, 58],           // Extraversion
+  A: [1, 4, 10, 12, 15, 33, 37, 44, 49, 54, 59],               // Agreeableness
+  N: [3, 8, 14, 16, 19, 20, 24, 45, 50, 55, 60]                // Neuroticism
+};
   // Reverse-scored questions (subtract from 6)
   const reverseScored = {
-    O: [21, 26, 36, 51],
-    C: [17, 23, 31, 43, 55],
-    E: [18, 32, 38, 47, 53, 59],
-    A: [15, 33, 37, 44, 54],
-    N: [20, 25, 46]
+    O: [21, 26, 36],                 // Openness
+    C: [17, 23, 25, 31, 47],         // Conscientiousness
+    E: [18, 32, 38, 43, 48],         // Extraversion
+    A: [15, 33, 54, 59],             // Agreeableness
+    N: [20]                          // Neuroticism
   };
-  
   let lastResult = null;
   
   // Calculate Big Five scores
