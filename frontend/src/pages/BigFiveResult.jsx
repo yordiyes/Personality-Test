@@ -46,10 +46,16 @@ const BigFiveResult = () => {
     const fetchResults = async () => {
       try {
         setLoading(true);
-        const response = await fetch($`{URL}/api/bigFiveTest/results`);
+        const response = await fetch(`${URL}/api/bigFiveTest/results`);
         if (!response.ok) throw new Error("Failed to fetch results.");
         const data = await response.json();
         if (data.error) throw new Error(data.error);
+        
+        // Ensure the data is in the correct format
+        if (!data.raw || !data.normalized) {
+          throw new Error("Invalid data format received from server");
+        }
+        
         setResults(data);
       } catch (err) {
         setError(err.message);
@@ -58,7 +64,7 @@ const BigFiveResult = () => {
       }
     };
     fetchResults();
-  }, []);
+  }, [URL]);  // Added URL to dependency array
 
   if (loading) return <p className="text-center text-lg">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -105,8 +111,8 @@ const BigFiveResult = () => {
           </tbody>
         </table>
       </div>
-      
-{/* Chart */}
+
+      {/* Chart */}
       <div className="flex justify-center items-center w-full mb-6">
         <ResponsiveContainer width="100%" height={350}>
           <PieChart>
@@ -117,13 +123,13 @@ const BigFiveResult = () => {
               cx="50%"
               cy="50%"
               outerRadius={120}
-              label={({ name, percent }) => $`{name}: ${(percent * 100).toFixed(0)}%`}
+              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
             >
               {chartData.map((entry, index) => (
-                <Cell key={cell-$`{index}`} fill={entry.color} />
+                <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip formatter={(value, name) => [$`{value}%`, name]} />
+            <Tooltip formatter={(value, name) => [`${value}%`, name]} />
           </PieChart>
         </ResponsiveContainer>
       </div>

@@ -13,8 +13,6 @@ const BigFivePage = () => {
 
   const allQuestions = React.useMemo(() => {
     const flattened = Object.values(questions).flat();
-    // Optional: Shuffle questions if needed
-    // return [...flattened].sort(() => Math.random() - 0.5);
     return flattened;
   }, []);
 
@@ -28,19 +26,11 @@ const BigFivePage = () => {
   }, [currentPage, allQuestions]);
 
   useEffect(() => {
-    // This ensures the form starts fresh on each page
-  }, [currentPage]);
-
-  useEffect(() => {
     const answeredCount = Object.keys(answers).filter(
       (id) => answers[id] !== undefined
     ).length;
-    const totalPossible = Math.min(
-      (currentPage + 1) * QUESTIONS_PER_PAGE,
-      totalQuestions
-    );
-    setProgress(Math.round((answeredCount / totalPossible) * 100));
-  }, [answers, currentPage, totalQuestions]);
+    setProgress(Math.round((answeredCount / totalQuestions) * 100));
+  }, [answers, totalQuestions]);
 
   const handleChange = (questionId, value) => {
     setAnswers((prev) => ({
