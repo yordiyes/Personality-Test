@@ -4,6 +4,7 @@ const cors = require("cors");
 const oejtsRoutes = require("./src/routes/oejts-routes");
 const enneagramRoutes = require("./src/routes/enneagram-routes");
 const riasecRoutes = require("./src/routes/riasec-routes");
+const bigfiveRoutes = require('./src/routes/bigfive-routes');
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use("/api/oejts", oejtsRoutes);
 app.use("/api/enneagram", enneagramRoutes);
 app.use("/api/riasec", riasecRoutes);
+app.use('/api/bigFiveTest', bigfiveRoutes);
 
 // Start the server
 const port = process.env.PORT || 5001;
