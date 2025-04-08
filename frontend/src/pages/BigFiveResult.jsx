@@ -46,7 +46,7 @@ const BigFiveResult = () => {
     const fetchResults = async () => {
       try {
         setLoading(true);
-        const response = await fetch(${URL}/api/bigFiveTest/results);
+        const response = await fetch($`{URL}/api/bigFiveTest/results`);
         if (!response.ok) throw new Error("Failed to fetch results.");
         const data = await response.json();
         if (data.error) throw new Error(data.error);
@@ -117,13 +117,13 @@ const BigFiveResult = () => {
               cx="50%"
               cy="50%"
               outerRadius={120}
-              label={({ name, percent }) => ${name}: ${(percent * 100).toFixed(0)}%}
+              label={({ name, percent }) => $`{name}: ${(percent * 100).toFixed(0)}%`}
             >
               {chartData.map((entry, index) => (
-                <Cell key={cell-${index}} fill={entry.color} />
+                <Cell key={cell-$`{index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip formatter={(value, name) => [${value}%, name]} />
+            <Tooltip formatter={(value, name) => [$`{value}%`, name]} />
           </PieChart>
         </ResponsiveContainer>
       </div>
