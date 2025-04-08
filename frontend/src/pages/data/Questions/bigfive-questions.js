@@ -16,7 +16,7 @@ const questions = {
   conscientiousness: [
     { id: 5, text: "I am always prepared.", reverse: false },
     { id: 11, text: "I get chores done right away.", reverse: false },
-    { id: 22, text: "I stop what I am doing to help other people.", reverse: false },
+    { id: 54, text: "I stop what I am doing to help other people.", reverse: false },
     { id: 29, text: "I always make good use of my time.", reverse: false },
     { id: 31, text: "I avoid taking on a lot of responsibility.", reverse: true },
     { id: 35, text: "I make plans and stick to them.", reverse: false },
@@ -24,8 +24,8 @@ const questions = {
     { id: 42, text: "Systematic" },
     { id: 52, text: "Self-Disciplined" },
     { id: 57, text: "Organized" },
-    { id :17, text: "If ind it difficult to get to work"},
-    { id :25, text: " I feel comfortable with myself"}
+    { id :17, text: "I find it difficult to get to work"},
+    { id :25, text: "I feel comfortable with myself"}
   ],
   statements: [
     { id: 7, text: "I feel comfortable around people.", reverse: false },
