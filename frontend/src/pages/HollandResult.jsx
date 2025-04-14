@@ -77,6 +77,48 @@ const HollandResult = () => {
     .map((item) => item.type)
     .join("");
 
+  // Determines degree of consistency from top 2 types
+  const getConsistencyDegree = (first, second) => {
+    const high = new Set([
+      "RI",
+      "RC",
+      "IR",
+      "IA",
+      "AI",
+      "AS",
+      "SA",
+      "SE",
+      "ES",
+      "EC",
+      "CE",
+      "CR",
+    ]);
+    const medium = new Set([
+      "RA",
+      "RE",
+      "IS",
+      "IC",
+      "AR",
+      "AE",
+      "SI",
+      "SC",
+      "EA",
+      "ER",
+      "CS",
+      "CI",
+    ]);
+    const low = new Set(["RS", "IE", "AC", "SR", "EI", "CA"]);
+
+    const combo = first + second;
+    const reverseCombo = second + first;
+
+    if (high.has(combo) || high.has(reverseCombo)) return "High";
+    if (medium.has(combo) || medium.has(reverseCombo)) return "Medium";
+    if (low.has(combo) || low.has(reverseCombo)) return "Low";
+
+    return "Unknown";
+  };
+
   return (
     <div className="max-w-6xl mx-auto sm:p-6 py-6 bg-white shadow-lg rounded-lg font-serif">
       <h1 className=" text-xl sm:text-2xl font-bold mb-4 text-center">
@@ -104,6 +146,45 @@ const HollandResult = () => {
               <p className="mt-4 ">
                 {hollandDescriptions[hollandCode[0]]?.description}
               </p>
+              {/* Degree of Consistency */}
+              <div className="mt-6 border-l-4 border-blue-500 bg-blue-50 p-4 rounded-md shadow-sm">
+                <h3 className="text-lg font-semibold text-blue-800 mb-1">
+                  Degree of Consistency:
+                </h3>
+                <p className="text-gray-800">
+                  Your top two personality types are{" "}
+                  <strong>{typeNames[sortedScores[0].type]}</strong> and{" "}
+                  <strong>{typeNames[sortedScores[1].type]}</strong> (
+                  {sortedScores[0].type + sortedScores[1].type}
+                  ), which indicates a{" "}
+                  <strong>
+                    {getConsistencyDegree(
+                      sortedScores[0].type,
+                      sortedScores[1].type
+                    )}{" "}
+                    degree of consistency
+                  </strong>
+                  .
+                </p>
+                <p className="text-sm text-gray-600 mt-2 italic">
+                  {(() => {
+                    const degree = getConsistencyDegree(
+                      sortedScores[0].type,
+                      sortedScores[1].type
+                    );
+                    if (degree === "High") {
+                      return "You have a well-aligned and focused personality profile, which may lead to more consistent career preferences.";
+                    } else if (degree === "Medium") {
+                      return "Your personality types are moderately aligned. You may show flexibility in your career interests while maintaining some consistency.";
+                    } else if (degree === "Low") {
+                      return "Your top traits are less naturally aligned, suggesting broader interests or a more complex personality that may explore diverse career paths.";
+                    } else {
+                      return "Insufficient data to determine consistency.";
+                    }
+                  })()}
+                </p>
+              </div>
+
               <h3 className="mt-4 text-xl font-semibold">
                 Career Suggestions:
               </h3>
