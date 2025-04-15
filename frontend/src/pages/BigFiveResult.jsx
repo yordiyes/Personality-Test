@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from "react";
-import {
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
+import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const traitInfo = {
-  O: { 
-    name: "Openness", 
-    color: "#8884d8", 
-    description: "Openness to experience describes a person's tendency to think in abstract, complex ways, enjoy novel experiences, and seek variety."
+  O: {
+    name: "Openness",
+    color: "#8884d8",
+    description:
+      "Openness to experience describes a person's tendency to think in abstract, complex ways, enjoy novel experiences, and seek variety.",
   },
-  C: { 
-    name: "Conscientiousness", 
-    color: "#82ca9d", 
-    description: "Conscientiousness reflects a person's ability to exercise self-discipline, control, and aim for goal achievement. It involves being organized, reliable, and hardworking."
+  C: {
+    name: "Conscientiousness",
+    color: "#82ca9d",
+    description:
+      "Conscientiousness reflects a person's ability to exercise self-discipline, control, and aim for goal achievement. It involves being organized, reliable, and hardworking.",
   },
-  E: { 
-    name: "Extraversion", 
-    color: "#ff7300", 
-    description: "Extraversion reflects how much a person seeks stimulation from the outside world. High extraversion is marked by sociability, assertiveness, and enthusiasm."
+  E: {
+    name: "Extraversion",
+    color: "#ff7300",
+    description:
+      "Extraversion reflects how much a person seeks stimulation from the outside world. High extraversion is marked by sociability, assertiveness, and enthusiasm.",
   },
-  A: { 
-    name: "Agreeableness", 
-    color: "#ff6384", 
-    description: "Agreeableness is characterized by compassion, cooperation, and a desire to maintain positive relationships with others. People high in agreeableness are empathetic and helpful."
+  A: {
+    name: "Agreeableness",
+    color: "#ff6384",
+    description:
+      "Agreeableness is characterized by compassion, cooperation, and a desire to maintain positive relationships with others. People high in agreeableness are empathetic and helpful.",
   },
-  N: { 
-    name: "Neuroticism", 
-    color: "#36a2eb", 
-    description: "Neuroticism measures a person's tendency to experience negative emotions such as anxiety, fear, sadness, and mood swings. People high in neuroticism may be more sensitive to stress."
-  }
+  N: {
+    name: "Neuroticism",
+    color: "#36a2eb",
+    description:
+      "Neuroticism measures a person's tendency to experience negative emotions such as anxiety, fear, sadness, and mood swings. People high in neuroticism may be more sensitive to stress.",
+  },
 };
 
 const BigFiveResult = () => {
@@ -50,12 +49,12 @@ const BigFiveResult = () => {
         if (!response.ok) throw new Error("Failed to fetch results.");
         const data = await response.json();
         if (data.error) throw new Error(data.error);
-        
+
         // Ensure the data is in the correct format
         if (!data.raw || !data.normalized) {
           throw new Error("Invalid data format received from server");
         }
-        
+
         setResults(data);
       } catch (err) {
         setError(err.message);
@@ -64,16 +63,17 @@ const BigFiveResult = () => {
       }
     };
     fetchResults();
-  }, [URL]);  // Added URL to dependency array
+  }, [URL]); // Added URL to dependency array
 
   if (loading) return <p className="text-center text-lg">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
-  if (!results) return <p className="text-center text-red-500">No results found.</p>;
+  if (!results)
+    return <p className="text-center text-red-500">No results found.</p>;
 
   const chartData = Object.keys(results.raw).map((trait) => ({
     name: traitInfo[trait].name,
     value: results.normalized[trait],
-    color: traitInfo[trait].color
+    color: traitInfo[trait].color,
   }));
 
   return (
@@ -83,7 +83,8 @@ const BigFiveResult = () => {
       </h1>
 
       <p className="text-center text-gray-600 mb-6">
-        The Big Five model measures five key personality traits. Below are your scores based on your responses.
+        The Big Five model measures five key personality traits. Below are your
+        scores based on your responses.
       </p>
 
       {/* Table */}
@@ -123,7 +124,9 @@ const BigFiveResult = () => {
               cx="50%"
               cy="50%"
               outerRadius={120}
-              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+              label={({ name, percent }) =>
+                `${name}: ${(percent * 100).toFixed(0)}%`
+              }
             >
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
@@ -138,7 +141,10 @@ const BigFiveResult = () => {
       <div className="space-y-6">
         {Object.keys(traitInfo).map((trait) => (
           <div key={trait} className="border-t pt-6">
-            <h3 className="text-xl font-semibold" style={{ color: traitInfo[trait].color }}>
+            <h3
+              className="text-xl font-semibold"
+              style={{ color: traitInfo[trait].color }}
+            >
               {traitInfo[trait].name}
             </h3>
             <p className="text-gray-700 mt-2">{traitInfo[trait].description}</p>
@@ -149,7 +155,8 @@ const BigFiveResult = () => {
       {/* Footer Message */}
       <div className="text-center text-sm text-gray-600 mt-4">
         <p>
-          These scores provide insights into your personality traits. Use them to understand yourself better or guide personal development.
+          These scores provide insights into your personality traits. Use them
+          to understand yourself better or guide personal development.
         </p>
       </div>
     </div>

@@ -14,7 +14,9 @@ import HollandPage from "./pages/HollandPage";
 import HollandResult from "./pages/HollandResult";
 import BigFivePage from "./pages/BigFivePage";
 import BigFiveResult from "./pages/BigFiveResult";
-
+import Login from "./pages/Login";
+import Tests from "./pages/Tests";
+import Profile from "./pages/Profile";
 
 const URL = import.meta.env.VITE_API_URL;
 
@@ -71,10 +73,13 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container font-serif">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/tests" element={<Tests />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/OEJTSTest" element={<OejtsPage />} />
           <Route
             path="/OEJTSTest/oepage1"
