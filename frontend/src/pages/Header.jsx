@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ onToggle }) => {
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white shadow-sm">
       {/* Left - Logo/Title */}
@@ -10,12 +10,13 @@ const Header = () => {
           alt="Logo"
           className="h-8 w-8 inline-block mr-2"
         />
-        <span>INSA Personality Testing</span>
+        <span className="sm:inline-block hidden">INSA Personality Testing</span>
+        <span className="sm:hidden">INSA</span>
       </div>
 
       {/* Right - User Profile */}
       <div className="flex items-center space-x-3">
-        <div className="text-right">
+        <div className="text-right hidden sm:block">
           <div className="font-semibold text-gray-700">Sarah Johnson</div>
           <div className="text-sm text-gray-500">Employee</div>
         </div>
@@ -23,6 +24,7 @@ const Header = () => {
           src="https://randomuser.me/api/portraits/women/44.jpg"
           alt="Profile"
           className="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
+          onClick={onToggle}
         />
       </div>
     </header>

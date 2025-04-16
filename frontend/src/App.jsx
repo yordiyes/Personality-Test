@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Oejts1 from "./pages/tests/Oejts1";
 import Oejts2 from "./pages/tests/Oejts2";
 import Enneagram from "./pages/tests/Enneagram";
@@ -22,6 +23,11 @@ const URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [answers, setAnswers] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleChange = (questionId, value) => {
     setAnswers((prev) => ({ ...prev, [questionId]: parseInt(value) }));
@@ -77,7 +83,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route
+            path="/home"
+            element={<Home onToggle={handleToggle} isOpen={isOpen} />}
+          />
           <Route path="/tests" element={<Tests />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/OEJTSTest" element={<OejtsPage />} />

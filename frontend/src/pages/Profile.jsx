@@ -20,7 +20,7 @@ const Profile = () => {
 
         <div className="flex-1 p-8">
           {/* Profile Header */}
-          <div className="flex items-center justify-between bg-white p-6 rounded-xl shadow mb-6">
+          <div className="md:flex items-center justify-between bg-white p-6 rounded-xl shadow mb-6">
             <div className="flex items-center space-x-4">
               <img
                 src="https://randomuser.me/api/portraits/women/44.jpg"
@@ -38,7 +38,7 @@ const Profile = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex items-center gap-3">
+            <div className="flex md:items-center gap-3  md:space-y-0 mt-6 md:mt-0">
               <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
                 Edit Profile
               </button>

@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./SideBar";
 
-const Home = () => {
+const Home = ({ onToggle, isOpen }) => {
   return (
     <div>
-      <Header />
+      <Header onToggle={onToggle} />
 
       <div className="flex h-screen bg-gray-100">
         {/* Sidebar */}
-        <SideBar />
+        <SideBar isOpen={isOpen} />
 
         {/* Main Content */}
         <div className="flex-1 p-8 overflow-y-auto">
