@@ -32,11 +32,7 @@ const COLORS = [
 const HollandResult = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
-<<<<<<< HEAD
   const URL = import.meta.env.VITE_API_URL;
-=======
-  const URL = import.meta.env.VITE_API_URL; 
->>>>>>> 1795689605f4dfb8450a02420079d9c7b898830c
 
   useEffect(() => {
     const fetchResult = async () => {
