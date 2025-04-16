@@ -10,10 +10,10 @@ export default function Login() {
   };
 
   return (
-    <div className=" flex flex-col m-10 shadow-2xl rounded-xl">
+    <div className=" h-screen sm:h-auto flex flex-col mx-2 sm:m-10 shadow-2xl rounded-xl">
       <div className="flex flex-1">
         {/* Right Side - Form */}
-        <div className="w-full md:w-1/2 relative flex items-center justify-center p-8 overflow-hidden bg-gray-50">
+        <div className="w-full md:w-1/2 relative flex items-center justify-center py-6 overflow-hidden bg-gray-50">
           {/* Blurry Background Image */}
           <img
             src="/logo.png"
@@ -22,7 +22,7 @@ export default function Login() {
           />
 
           {/* Content */}
-          <div className="w-full max-w-md z-10 p-6 ">
+          <div className="w-full max-w-md z-10 py-6 ">
             {/* Logo & Title */}
             <div className="text-center mb-8">
               <h2 className="mt-4 text-2xl font-extrabold text-gray-900">
